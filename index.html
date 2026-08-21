@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manohar Singh - Video Editor Portfolio</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- VFX styles added -->
     <link rel="stylesheet" href="vfx.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -49,14 +48,13 @@
             <a href="#skills" class="sidebar-link"><i class="fas fa-code"></i> Skills</a>
             <a href="#projects" class="sidebar-link"><i class="fas fa-project-diagram"></i> Projects</a>
             <a href="#service" class="sidebar-link"><i class="fas fa-handshake"></i> My Service</a>
-            <!-- Chat triggers moved into sidebar -->
             <button class="sidebar-link sidebar-trigger" id="openChatbotFromSidebar"><i class="fas fa-comment-dots"></i> Creative Services</button>
             <button class="sidebar-link sidebar-trigger" id="openSocialFromSidebar"><i class="fas fa-share-alt"></i> Connect</button>
         </div>
     </aside>
 
 
-<!-- Hero Section (updated with VFX buttons + online background + portrait) -->
+<!-- Hero Section -->
 <section id="home" class="hero vfx-hero">
     <div class="vfx-container">
         <div class="vfx-left">
@@ -72,7 +70,6 @@
 
         <div class="vfx-right">
             <div class="portrait" id="portrait">
-                <!-- prefer local image from Img/; falling back to online placeholder if not available -->
                 <img src="Img/p1.jpg" alt="profile" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80'">
             </div>
         </div>
@@ -104,11 +101,32 @@
     </div>
 </section>
 
+<!-- Skills Section -->
+<section id="skills" class="skills">
+    <h2>My Skills</h2>
+    <div class="skills-container">
+        <div class="skill-card">
+            <i class="fas fa-film"></i>
+            <h3>Video Editing</h3>
+            <p>Adobe Premiere Pro, Final Cut Pro</p>
+        </div>
+        <div class="skill-card">
+            <i class="fas fa-magic"></i>
+            <h3>Visual Effects</h3>
+            <p>After Effects, DaVinci Resolve</p>
+        </div>
+        <div class="skill-card">
+            <i class="fas fa-palette"></i>
+            <h3>Color Grading</h3>
+            <p>LUTs, Manual Correction</p>
+        </div>
+    </div>
+</section>
+
 <!-- Projects Section -->
 <section id="projects" class="projects">
     <h2>My Projects</h2>
     <div class="projects-grid">
-        <!-- Project 1 -->
         <a href="project-detail.html" class="project-card-link">
           <div class="project-card">
               <img src="Img/m1.jpg" alt="Documentary Film Editing" class="project-img">
@@ -117,7 +135,6 @@
           </div>
         </a>
 
-        <!-- Project 2 -->
         <a href="project-detail.html" class="project-card-link">
           <div class="project-card">
               <img src="Img/m2.jpg" alt="Commercial Advertisement" class="project-img">
@@ -126,7 +143,6 @@
           </div>
         </a>
 
-        <!-- Project 3 -->
         <a href="project-detail.html" class="project-card-link">
           <div class="project-card">
               <img src="Img/m3.jpg" alt="Social Media Reels" class="project-img">
@@ -137,7 +153,7 @@
     </div>
 </section>
 
-<!-- Service Section (Creative Services) -->
+<!-- Service Section -->
 <section id="service" class="about">
   <h2>My Service</h2>
   <div class="about-content">
@@ -146,14 +162,12 @@
       <button class="buy-btn" id="openChatbotFromService">Open Creative Services</button>
     </div>
     <div class="about-image">
-      <!-- small promo image -->
       <img src="Img/m2.jpg" alt="service" class="profile-img" style="width:320px;height:220px;object-fit:cover;">
     </div>
   </div>
 </section>
 
-
-<!-- Chatbot Popup (kept as popup, triggered from sidebar and service section) -->
+<!-- Chatbot Popup -->
 <div class="chatbot-popup" id="chatbotPopup">
   <div class="chatbot-header">
     <h3>Creative Services</h3>
@@ -215,9 +229,40 @@
   </div>
 </div>
 
-<!-- Footer (professional) -->
+<!-- Floating FAB for chat -->
+<div id="chat-fab" class="chat-fab" aria-label="Open chat" title="Chat with me">
+  <i class="fas fa-comment-dots"></i>
+</div>
+
 <footer class="footer" style="background:#0b0b0b;color:#ddd;padding:40px 5%;">
   <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center">
     <div style="flex:1;min-width:220px">
       <div style="font-weight:700;font-size:1.1rem">Manohar Singh</div>
-      <div style="font-size:0.95rem;margin-top:6px">© 
+      <div style="font-size:0.95rem;margin-top:6px">© <span id="yearFooter"></span> Manohar Singh. All rights reserved.</div>
+      <div style="font-size:0.86rem;color:#9aa;margin-top:8px">Disclaimer: Portfolio content for demonstration. Delivery & usage terms on contract.</div>
+    </div>
+
+    <div style="flex:1;min-width:240px;text-align:center">
+      <div style="font-weight:600;margin-bottom:8px">Brand partners</div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <img src="https://via.placeholder.com/120x40?text=Partner+1" alt="partner1" style="height:40px;object-fit:contain">
+        <img src="https://via.placeholder.com/120x40?text=Partner+2" alt="partner2" style="height:40px;object-fit:contain">
+        <img src="https://via.placeholder.com/120x40?text=Partner+3" alt="partner3" style="height:40px;object-fit:contain">
+      </div>
+    </div>
+
+    <div style="flex:1;min-width:220px;text-align:right">
+      <div style="font-weight:600;margin-bottom:8px">Follow</div>
+      <div style="display:flex;gap:12px;justify-content:flex-end">
+        <a href="https://www.instagram.com/themanohar_singh" style="color:inherit"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/share/1AKdJHHdwV/" style="color:inherit"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.linkedin.com/in/manohar-singh-49a15b2b6" style="color:inherit"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('yearFooter').textContent = new Date().getFullYear();</script>
+
+    <script src="script.js"></script>
+</body>
+</html>
