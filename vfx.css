@@ -148,6 +148,32 @@
   pointer-events:none;
 }
 
+/* Floating FAB */
+.chat-fab{
+  position:fixed;
+  right:20px;
+  bottom:22px;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#00c2ff,#0066ff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#021019;
+  font-size:20px;
+  box-shadow:0 10px 30px rgba(2,110,255,0.18);
+  z-index:12000;
+  cursor:pointer;
+  transition:transform .14s ease, box-shadow .14s ease;
+}
+.chat-fab:hover{ transform:translateY(-4px); box-shadow:0 16px 36px rgba(2,110,255,0.22); }
+
+/* mobile: hide heavy floating widgets */
+@media (max-width:720px){
+  .chatbot-widget, .social-chatbot { display:none !important; }
+}
+
 /* small responsive */
 @media (max-width:900px){
   .vfx-container{ flex-direction:column-reverse; gap:28px; align-items:center }
