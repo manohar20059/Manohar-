@@ -1,0 +1,158 @@
+:root{
+  --vfx-accent1: #00c2ff;
+  --vfx-accent2: #0066ff;
+  --vfx-bg-dark: #0f1011;
+  --vfx-surface: rgba(10,10,10,0.6);
+}
+
+/* Hero layout */
+.vfx-hero{
+  min-height:88vh;
+  display:flex;
+  align-items:center;
+  padding:48px 5%;
+  background-image:
+    linear-gradient(180deg, rgba(6,6,6,0.55), rgba(6,6,6,0.55)),
+    url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1950&q=80');
+  background-size:cover;
+  background-position:50% 50%;
+  position:relative;
+  overflow:hidden;
+  color:#e8f7ff;
+}
+
+/* subtle vignette / radial accent on right */
+.vfx-hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(900px 500px at 85% 50%, rgba(0,110,255,0.15), transparent 8%),
+    radial-gradient(600px 400px at 10% 50%, rgba(0,0,0,0.4), transparent 25%);
+  pointer-events:none;
+}
+
+/* container inside hero */
+.vfx-container{
+  display:flex;
+  gap:36px;
+  max-width:1200px;
+  margin:0 auto;
+  width:100%;
+  align-items:center;
+}
+.vfx-left{ flex:1; padding:24px 12px; max-width:760px }
+.vfx-right{ width:420px; display:flex; justify-content:center; align-items:center }
+
+/* Text */
+.eyebrow{ color:#bfeeff; font-weight:600; margin-bottom:8px }
+.vfx-title{ font-size:64px; margin:0 0 12px; color:var(--vfx-accent1); line-height:0.95 }
+.vfx-lead{ color:#d7dfe6; max-width:680px; margin-bottom:22px; font-size:16px }
+
+/* Buttons area */
+.vfx-buttons{ display:flex; gap:16px; align-items:center; flex-wrap:wrap }
+
+/* base btn */
+.vfx-btn{
+  position:relative;
+  display:inline-block;
+  padding:12px 22px;
+  border-radius:10px;
+  font-weight:700;
+  text-decoration:none;
+  cursor:pointer;
+  overflow:visible;
+  transition:transform .18s ease, color .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Primary filled with sliding neon underline */
+.vfx-primary{
+  background: linear-gradient(180deg,var(--vfx-accent1),var(--vfx-accent2));
+  color:#041018;
+  box-shadow: 0 10px 28px rgba(0,110,255,0.16);
+}
+.vfx-primary::after{
+  content:"";
+  position:absolute;
+  left:10px; right:10px;
+  bottom:-8px;
+  height:8px;
+  border-radius:8px;
+  background: linear-gradient(90deg, rgba(0,194,255,0.95), rgba(0,102,255,0.95));
+  transform: scaleX(0);
+  transform-origin:left;
+  transition: transform .45s cubic-bezier(.2,.9,.2,1);
+  filter: blur(6px);
+  opacity:.95;
+}
+.vfx-primary:hover::after,
+.vfx-primary:focus::after{ transform:scaleX(1) }
+.vfx-primary:active{ transform:translateY(1px) }
+
+/* Outline button with animated neon aura */
+.vfx-outline{
+  color:var(--vfx-accent1);
+  background:transparent;
+  padding:10px 20px;
+  border:2px solid rgba(0,194,255,0.14);
+  border-radius:10px;
+}
+.vfx-outline::before{
+  content:"";
+  position:absolute;
+  inset:-4px;
+  z-index:-1;
+  border-radius:14px;
+  background: conic-gradient(from 0deg, rgba(0,194,255,0.95), rgba(0,102,255,0.95), rgba(128,0,255,0.6), rgba(0,194,255,0.95));
+  opacity:0;
+  filter: blur(10px) saturate(140%);
+  transition: opacity .28s ease, transform .6s linear;
+}
+.vfx-outline:hover::before,
+.vfx-outline:focus::before{
+  opacity:1;
+  transform: rotate(20deg);
+  animation: vfx-spin 2.8s linear infinite;
+}
+@keyframes vfx-spin{ from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+/* Portrait with neon ring */
+.portrait{
+  width:320px; height:320px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.03), transparent 25%), rgba(2,2,2,0.36);
+  position:relative; box-shadow: 0 20px 80px rgba(0,0,0,0.7);
+  transition: transform .25s ease;
+}
+.portrait img{ width:86%; height:86%; object-fit:cover; border-radius:50%; filter:grayscale(50%); position:relative; z-index:2 }
+
+/* neon outer ring */
+.portrait::before{
+  content:"";
+  position:absolute;
+  inset:-14px;
+  border-radius:50%;
+  background: conic-gradient(from 180deg, rgba(0,194,255,1), rgba(0,102,255,0.95), rgba(0,194,255,0.9));
+  filter: blur(8px);
+  z-index:0;
+  mix-blend-mode:screen;
+}
+/* inner subtle glow */
+.portrait::after{
+  content:"";
+  position:absolute;
+  inset:28px;
+  border-radius:50%;
+  box-shadow: 0 0 80px rgba(0,150,255,0.45), inset 0 0 30px rgba(0,100,255,0.2);
+  z-index:1;
+  pointer-events:none;
+}
+
+/* small responsive */
+@media (max-width:900px){
+  .vfx-container{ flex-direction:column-reverse; gap:28px; align-items:center }
+  .vfx-title{ font-size:44px; text-align:center }
+  .vfx-left{ text-align:center }
+  .vfx-right{ width:260px }
+  .portrait{ width:260px; height:260px }
+}
