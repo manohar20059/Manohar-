@@ -1,3 +1,4 @@
+// script.js — updated handlers: stopPropagation for open buttons, FAB toggle, safer outside-click checks, removed JS hide of widgets
 document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle
     const hamburger = document.getElementById('hamburger');
@@ -5,283 +6,156 @@ document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.getElementById('sidebar');
     
     // Toggle sidebar
-    hamburger.addEventListener('click', function() {
-        sidebar.classList.add('active');
-    });
+    if (hamburger && sidebar) {
+      hamburger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          sidebar.classList.add('active');
+      });
+    }
     
     // Close sidebar
-    closeBtn.addEventListener('click', function() {
-        sidebar.classList.remove('active');
-    });
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          sidebar.classList.remove('active');
+      });
+    }
     
     // Close sidebar when clicking outside
     document.addEventListener('click', function(event) {
-        if (!sidebar.contains(event.target) && event.target !== hamburger) {
+        if (sidebar && !sidebar.contains(event.target) && event.target !== hamburger) {
             sidebar.classList.remove('active');
         }
     });
     
     // Theme toggle functionality
     const themeToggle = document.querySelector('.theme-toggle');
-    themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-theme');
-        
-        // Toggle icon between moon and sun
-        const icon = themeToggle.querySelector('i');
-        if (document.body.classList.contains('dark-theme')) {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-        } else {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-        }
-    });
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function() {
+          document.body.classList.toggle('dark-theme');
+          
+          // Toggle icon between moon and sun
+          const icon = themeToggle.querySelector('i');
+          if (document.body.classList.contains('dark-theme')) {
+              icon.classList.remove('fa-moon');
+              icon.classList.add('fa-sun');
+          } else {
+              icon.classList.remove('fa-sun');
+              icon.classList.add('fa-moon');
+          }
+      });
+    }
     
     // Close sidebar when a link is clicked (for mobile)
     const sidebarLinks = document.querySelectorAll('.sidebar-link');
     sidebarLinks.forEach(link => {
         link.addEventListener('click', function() {
-            sidebar.classList.remove('active');
+            if (sidebar) sidebar.classList.remove('active');
         });
     });
-});
-// Theme Toggle
-const themeToggle = document.querySelector('.theme-toggle');
-const body = document.body;
 
-// Check for saved theme preference
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme) {
-    body.setAttribute('data-theme', currentTheme);
-    updateThemeIcon();
-}
+    // Hook popup triggers (stopPropagation to avoid immediate outside-close)
+    const s1 = document.getElementById('openChatbotFromSidebar');
+    const s2 = document.getElementById('openChatbotFromService');
+    const s3 = document.getElementById('openSocialFromSidebar');
+    const fab = document.getElementById('chat-fab');
 
-themeToggle.addEventListener('click', () => {
-    if (body.getAttribute('data-theme') === 'dark') {
-        body.setAttribute('data-theme', 'light');
-    } else {
-        body.setAttribute('data-theme', 'dark');
+    const chatbotPopup = document.getElementById('chatbotPopup');
+    const socialPopup = document.getElementById('socialChatbotPopup');
+
+    function openCreativeServicePopup(e){
+      if(e && e.stopPropagation) e.stopPropagation();
+      if(chatbotPopup) chatbotPopup.classList.add('active');
     }
-    localStorage.setItem('theme', body.getAttribute('data-theme'));
-    updateThemeIcon();
-});
-
-function updateThemeIcon() {
-    const icon = themeToggle.querySelector('i');
-    if (body.getAttribute('data-theme') === 'dark') {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-    } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
+    function openSocialPopup(e){
+      if(e && e.stopPropagation) e.stopPropagation();
+      if(socialPopup) socialPopup.classList.add('active');
     }
-}
 
-// Mobile Navigation
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
+    if (s1) s1.addEventListener('click', openCreativeServicePopup);
+    if (s2) s2.addEventListener('click', openCreativeServicePopup);
+    if (s3) s3.addEventListener('click', openSocialPopup);
 
-hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    hamburger.classList.toggle('active');
-});
+    // FAB toggles chatbot popup
+    if (fab) {
+      fab.addEventListener('click', function(e){
+        e.stopPropagation();
+        if (chatbotPopup) chatbotPopup.classList.toggle('active');
+      });
+    }
 
-// Close mobile menu when clicking a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
-    });
-});
+    // Close handlers for popups
+    const closeChat = document.getElementById('closeChatbot');
+    if (closeChat && chatbotPopup) closeChat.addEventListener('click', function(e){ e.stopPropagation(); chatbotPopup.classList.remove('active'); });
+    const closeSocial = document.getElementById('closeSocialChatbot');
+    if (closeSocial && socialPopup) closeSocial.addEventListener('click', function(e){ e.stopPropagation(); socialPopup.classList.remove('active'); });
 
-// Chat Widget
-const chatIcon = document.querySelector('.chat-icon');
-const chatBox = document.querySelector('.chat-box');
-const closeChat = document.querySelector('.close-chat');
-const questionList = document.querySelector('.question-list');
-const answersContainer = document.querySelector('.answers-container');
+    // Prevent popups from closing when clicking inside them
+    if (chatbotPopup) chatbotPopup.addEventListener('click', function(e){ e.stopPropagation(); });
+    if (socialPopup) socialPopup.addEventListener('click', function(e){ e.stopPropagation(); });
 
-// Questions and Answers
-const questions = [
-    "आपके वीडियो एडिटिंग स्टाइल की खासियत क्या है?",
-    "आप किन सॉफ्टवेयर्स में काम करते हैं?",
-    "आपका सबसे चैलेंजिंग प्रोजेक्ट कौनसा था?",
-    "आप कलर ग्रेडिंग को कैसे हैंडल करते हैं?",
-    "आपकी एडिटिंग वर्कफ्लो प्रोसेस क्या है?",
-    "आप ट्रेंडिंग रील्स/शॉर्ट्स कैसे एडिट करते हैं?",
-    "आप किस तरह के प्रोजेक्ट्स पसंद करते हैं?",
-    "आप डेडलाइन्स को कैसे मैनेज करते हैं?",
-    "आपके पास कितना एक्सपीरियंस है?",
-    "आप क्लाइंट फीडबैक को कैसे हैंडल करते हैं?"
-];
-
-const answers = [
-    "मैं सिनेमैटिक एडिटिंग और डायनामिक ट्रांजिशन्स में स्पेशलाइज्ड हूं, स्ट[...]",
-    "Adobe Premiere Pro, After Effects, DaVinci Resolve और Final Cut Pro में काम करता हूं।",
-    "50+ घंटे के रॉ फुटेज से 5-मिनट की डॉक्यूमेंट्री बनाना मेरा सबसे चैलेंजिंग प्रोजेक्ट था।",
-    "DaVinci Resolve में LUTs यूज़ करता हूं, मैन्युअल कलर करेक्शन और मूड के हिसाब से ग्रेडिंग करता हूं।",
-    "ब्रीफिंग → फुटेज लॉग → रफ कट → फाइनल एडिट → कलर ग्रेडिंग → साउंड डिज़ाइन।",
-    "फास्ट-पेस्ड एडिट्स, बीट-सिंक्ड ट्रांजिशन्स और अटेंशन-ग्रैबिंग ओपनिंग पर फोकस करता हूं।",
-    "मुझे क्रिएटिव स्टोरीटेलिंग और हाई-एनर्जी कमर्शियल दोनों प्रोजेक्ट्स पसंद हैं।",
-    "प्रोजेक्ट को छोटे टास्क्स में बाँटकर टाइम मैनेजमेंट टूल्स का यूज़ करता हूं।",
-    "3+ साल का एक्सपीरियंस, 50+ क्लाइंट प्रोजेक्ट्स कंप्लीट किए हैं।",
-    "टाइमस्टैम्प्ड फीडबैक लेता हूं, 2 फ्री रिवीजन्स ऑफर करता हूं।"
-];
-
-// Populate questions
-questions.forEach((question, index) => {
-    const questionItem = document.createElement('div');
-    questionItem.classList.add('question-item');
-    questionItem.textContent = question;
-    questionItem.addEventListener('click', () => {
-        showAnswer(index);
-    });
-    if (questionList) questionList.appendChild(questionItem);
-});
-
-function showAnswer(index) {
-    // Clear previous answers
-    if (!answersContainer) return;
-    answersContainer.innerHTML = '';
-    
-    // Create and show the selected answer
-    const answerItem = document.createElement('div');
-    answerItem.classList.add('answer-item', 'active');
-    answerItem.textContent = answers[index];
-    answersContainer.appendChild(answerItem);
-    
-    // Scroll to the answer
-    answersContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
-}
-
-// Toggle chat box
-if (chatIcon && chatBox) {
-  chatIcon.addEventListener('click', () => {
-      chatBox.classList.toggle('active');
-  });
-}
-
-if (closeChat && chatBox) {
-  closeChat.addEventListener('click', () => {
-      chatBox.classList.remove('active');
-  });
-}
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-    });
-});
-
-// Enhanced Chatbot Functionality
-document.addEventListener('DOMContentLoaded', function() {
-  const chatbotIcon = document.getElementById('chatbotIcon');
-  const chatbotPopup = document.getElementById('chatbotPopup');
-  const closeChatbot = document.getElementById('closeChatbot');
-  
-  if (chatbotIcon && chatbotPopup) {
-    // Toggle with better animation
-    chatbotIcon.addEventListener('click', function() {
-      if(chatbotPopup.classList.contains('active')) {
+    // Global outside-click: close popups only when click is outside popups and not on known triggers
+    document.addEventListener('click', function(event){
+      const target = event.target;
+      const clickedOnTrigger = !!(target.closest('#openChatbotFromSidebar') || target.closest('#openChatbotFromService') || target.closest('#openSocialFromSidebar') || target.closest('#chat-fab'));
+      if (chatbotPopup && !chatbotPopup.contains(target) && !clickedOnTrigger){
         chatbotPopup.classList.remove('active');
-      } else {
-        // Close any other open popups first
-        document.querySelectorAll('.chatbot-popup.active').forEach(popup => {
-          popup.classList.remove('active');
-        });
-        chatbotPopup.classList.add('active');
+      }
+      if (socialPopup && !socialPopup.contains(target) && !clickedOnTrigger){
+        socialPopup.classList.remove('active');
       }
     });
-  }
-  
-  if (closeChatbot && chatbotPopup) {
-    // Smooth close
-    closeChatbot.addEventListener('click', function() {
-      chatbotPopup.classList.add('closing');
-      setTimeout(() => {
-        chatbotPopup.classList.remove('active', 'closing');
-      }, 300);
-    });
-  }
-  
-  // Better outside click handling
-  document.addEventListener('click', function(event) {
-    if (!event.target.closest('.chatbot-popup') && chatbotPopup) {
-      chatbotPopup.classList.add('closing');
-      setTimeout(() => {
-        chatbotPopup.classList.remove('active', 'closing');
-      }, 300);
-    }
-  });
-});
-// Social Chatbot Functionality
-document.addEventListener('DOMContentLoaded', function() {
-  const socialChatbotIcon = document.getElementById('socialChatbotIcon');
-  const socialChatbotPopup = document.getElementById('socialChatbotPopup');
-  const closeSocialChatbot = document.getElementById('closeSocialChatbot');
-  
-  if (socialChatbotIcon && socialChatbotPopup) {
-    // Toggle social chatbot popup
-    socialChatbotIcon.addEventListener('click', function() {
-      socialChatbotPopup.classList.toggle('active');
-    });
-  }
-  
-  if (closeSocialChatbot && socialChatbotPopup) {
-    // Close social chatbot popup
-    closeSocialChatbot.addEventListener('click', function() {
-      socialChatbotPopup.classList.remove('active');
-    });
-  }
-  
-  // Close when clicking outside
-  document.addEventListener('click', function(event) {
-    if (socialChatbotPopup && !socialChatbotPopup.contains(event.target) && 
-        event.target !== socialChatbotIcon &&
-        !socialChatbotIcon.contains(event.target)) {
-      socialChatbotPopup.classList.remove('active');
-    }
-  });
+
 });
 
-// --- Added handlers: open/close popups from sidebar & service, and hide floating widgets ---
-function openCreativeServicePopup(){
-  const p = document.getElementById('chatbotPopup');
-  if(p) p.classList.add('active');
+// Theme Toggle persistent (outside DOMContentLoaded for initial load)
+const _themeToggle = document.querySelector('.theme-toggle');
+const _body = document.body;
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme) {
+    _body.setAttribute('data-theme', currentTheme);
+    (function updateThemeIcon(){
+      const icon = _themeToggle && _themeToggle.querySelector('i');
+      if (!icon) return;
+      if (_body.getAttribute('data-theme') === 'dark') {
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+      } else {
+          icon.classList.remove('fa-sun');
+          icon.classList.add('fa-moon');
+      }
+    })();
 }
-function closeCreativeServicePopup(){
-  const p = document.getElementById('chatbotPopup');
-  if(p) p.classList.remove('active');
-}
-function openSocialPopup(){
-  const p = document.getElementById('socialChatbotPopup');
-  if(p) p.classList.add('active');
-}
-function closeSocialPopup(){
-  const p = document.getElementById('socialChatbotPopup');
-  if(p) p.classList.remove('active');
-}
 
-document.addEventListener('DOMContentLoaded', function(){
-  const s1 = document.getElementById('openChatbotFromSidebar');
-  const s2 = document.getElementById('openChatbotFromService');
-  const s3 = document.getElementById('openSocialFromSidebar');
-
-  if(s1) s1.addEventListener('click', openCreativeServicePopup);
-  if(s2) s2.addEventListener('click', openCreativeServicePopup);
-  if(s3) s3.addEventListener('click', openSocialPopup);
-
-  const closeChat = document.getElementById('closeChatbot');
-  if(closeChat) closeChat.addEventListener('click', closeCreativeServicePopup);
-
-  const closeSocial = document.getElementById('closeSocialChatbot');
-  if(closeSocial) closeSocial.addEventListener('click', closeSocialPopup);
-
-  // hide old floating widgets so they don't overlap content
-  document.querySelectorAll('.chat-widget, .chatbot-widget, .social-chatbot').forEach(el=>{
-    if(el) el.style.display = 'none';
+if (_themeToggle) {
+  _themeToggle.addEventListener('click', () => {
+      if (_body.getAttribute('data-theme') === 'dark') {
+          _body.setAttribute('data-theme', 'light');
+      } else {
+          _body.setAttribute('data-theme', 'dark');
+      }
+      localStorage.setItem('theme', _body.getAttribute('data-theme'));
+      const icon = _themeToggle.querySelector('i');
+      if (!_body) return;
+      if (_body.getAttribute('data-theme') === 'dark') {
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+      } else {
+          icon.classList.remove('fa-sun');
+          icon.classList.add('fa-moon');
+      }
   });
+}
+
+// Smooth scrolling for anchor links (generic)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
 });
