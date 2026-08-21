@@ -49,6 +49,9 @@
             <a href="#skills" class="sidebar-link"><i class="fas fa-code"></i> Skills</a>
             <a href="#projects" class="sidebar-link"><i class="fas fa-project-diagram"></i> Projects</a>
             <a href="#service" class="sidebar-link"><i class="fas fa-handshake"></i> My Service</a>
+            <!-- Chat triggers moved into sidebar -->
+            <button class="sidebar-link sidebar-trigger" id="openChatbotFromSidebar"><i class="fas fa-comment-dots"></i> Creative Services</button>
+            <button class="sidebar-link sidebar-trigger" id="openSocialFromSidebar"><i class="fas fa-share-alt"></i> Connect</button>
         </div>
     </aside>
 
@@ -62,15 +65,15 @@
             <p class="vfx-lead">Creating cinematic experiences through dynamic editing — cuts, VFX, color grading and motion graphics that tell your story.</p>
 
             <div class="vfx-buttons">
-                <a class="vfx-btn vfx-primary" href="#projects">Hire Me</a>
+                <a class="vfx-btn vfx-primary" href="#service">Hire Me</a>
                 <a class="vfx-btn vfx-outline" href="#projects">View My Work</a>
             </div>
         </div>
 
         <div class="vfx-right">
             <div class="portrait" id="portrait">
-                <!-- replace with your image or keep this online placeholder -->
-                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="profile">
+                <!-- prefer local image from Img/; falling back to online placeholder if not available -->
+                <img src="Img/p1.jpg" alt="profile" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80'">
             </div>
         </div>
     </div>
@@ -92,7 +95,7 @@
         </div>
         <div class="about-image">
             <img 
-                src="/img /p1.jpg" 
+                src="Img/p1.jpg" 
                 alt="Manohar Singh - Video Editor" 
                 class="profile-img"
                 onerror="this.src='https://via.placeholder.com/400x400?text=Profile+Image';"
@@ -101,192 +104,120 @@
     </div>
 </section>
 
-<!-- rest of the file remains unchanged -->
-
 <!-- Projects Section -->
 <section id="projects" class="projects">
     <h2>My Projects</h2>
     <div class="projects-grid">
         <!-- Project 1 -->
-        <div class="project-card">
-            <img src="/img /m1.jpg" alt="Documentary Film Editing" class="project-img">
-            <h3>Documentary Film</h3>
-            <p>50+ hours of raw footage edited into 5-minute documentary</p>
-        </div>
+        <a href="project-detail.html" class="project-card-link">
+          <div class="project-card">
+              <img src="Img/m1.jpg" alt="Documentary Film Editing" class="project-img">
+              <h3>Documentary Film</h3>
+              <p>50+ hours of raw footage edited into 5-minute documentary</p>
+          </div>
+        </a>
 
         <!-- Project 2 -->
-        <div class="project-card">
-            <img src="/img /m2.jpg" alt="Commercial Advertisement" class="project-img">
-            <h3>Commercial Ad</h3>
-            <p>High-energy product advertisement</p>
-        </div>
+        <a href="project-detail.html" class="project-card-link">
+          <div class="project-card">
+              <img src="Img/m2.jpg" alt="Commercial Advertisement" class="project-img">
+              <h3>Commercial Ad</h3>
+              <p>High-energy product advertisement</p>
+          </div>
+        </a>
 
         <!-- Project 3 -->
-        <div class="project-card">
-            <img src="/img /m3.jpg" alt="Social Media Reels" class="project-img">
-            <h3>Social Media Content</h3>
-            <p>Trending reels and shorts</p>
-        </div>
+        <a href="project-detail.html" class="project-card-link">
+          <div class="project-card">
+              <img src="Img/m3.jpg" alt="Social Media Reels" class="project-img">
+              <h3>Social Media Content</h3>
+              <p>Trending reels and shorts</p>
+          </div>
+        </a>
     </div>
 </section>
 
-<!-- Chat Widget -->
-    <div class="chat-widget">
-        <div class="chat-icon">
-            <i class="fab fa-whatsapp"></i>
-        </div>
-        <div class="chat-box">
-            <div class="chat-header">
-                <h3>Quick Help</h3>
-                <button class="close-chat"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="chat-body">
-                <div class="bot-message">
-                    <div class="bot-icon">🤖</div>
-                    <div class="message-content">
-                        Hello, I'm Manohar Singh. How can I help you?
-                    </div>
-                </div>
-                <div class="questions-container">
-                    <div class="question-tag">Frequently Asked Questions</div>
-                    <div class="question-list">
-                        <!-- Questions will be added here by JavaScript -->
-                    </div>
-                </div>
-                <div class="answers-container">
-                    <!-- Answers will appear here when questions are clicked -->
-                </div>
-            </div>
-        </div>
+<!-- Service Section (Creative Services) -->
+<section id="service" class="about">
+  <h2>My Service</h2>
+  <div class="about-content">
+    <div class="about-text">
+      <p>Click below to open creative services and packages (you can contact or buy from here).</p>
+      <button class="buy-btn" id="openChatbotFromService">Open Creative Services</button>
     </div>
-    <!-- Chatbot Widget -->
-<div class="chatbot-widget">
-  <div class="chatbot-icon" id="chatbotIcon">
-    <i class="fas fa-comment-dots"></i>
-    <span class="online-label">Online Service</span>
+    <div class="about-image">
+      <!-- small promo image -->
+      <img src="Img/m2.jpg" alt="service" class="profile-img" style="width:320px;height:220px;object-fit:cover;">
+    </div>
   </div>
-  
-  <div class="chatbot-popup" id="chatbotPopup">
-    <div class="chatbot-header">
-      <h3>Creative Services</h3>
-      <button class="close-chatbot" id="closeChatbot">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    
-    <div class="chatbot-body">
-      <div class="service-cards">
-        <!-- Service Card 1 -->
-        <div class="service-card">
-          <div class="card-icon">
-            <i class="fas fa-film"></i>
-          </div>
-          <h4>Video Editing</h4>
-          <div class="price-tag trending">
-            $30 <span>Trending</span>
-          </div>
-          <a href="https://wa.me/9079216393?text=Hi,%20I'm%20interested%20in%20Video%20Editing%20service" class="buy-btn" target="_blank">
-            Buy Now <i class="fab fa-whatsapp"></i>
-          </a>
-        </div>
-        
-        <!-- Service Card 2 -->
-        <div class="service-card">
-          <div class="card-icon">
-            <i class="fas fa-share-alt"></i>
-          </div>
-          <h4>Social Media Content</h4>
-          <div class="price-tag">
-            $25
-          </div>
-          <a href="https://wa.me/9079216393?text=Hi,%20I'm%20interested%20in%20Social%20Media%20Content%20service" class="buy-btn" target="_blank">
-            Buy Now <i class="fab fa-whatsapp"></i>
-          </a>
-        </div>
-        
-        <!-- Service Card 3 -->
-        <div class="service-card">
-          <div class="card-icon">
-            <i class="fas fa-video"></i>
-          </div>
-          <h4>Documentary Film</h4>
-          <div class="price-tag">
-            $45
-          </div>
-          <a href="https://wa.me/9079216393?text=Hi,%20I'm%20interested%20in%20Documentary%20Film%20service" class="buy-btn" target="_blank">
-            Buy Now <i class="fab fa-whatsapp"></i>
-          </a>
-        </div>
+</section>
+
+
+<!-- Chatbot Popup (kept as popup, triggered from sidebar and service section) -->
+<div class="chatbot-popup" id="chatbotPopup">
+  <div class="chatbot-header">
+    <h3>Creative Services</h3>
+    <button class="close-chatbot" id="closeChatbot">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="chatbot-body">
+    <div class="service-cards">
+      <div class="service-card">
+        <div class="card-icon"><i class="fas fa-film"></i></div>
+        <h4>Video Editing</h4>
+        <div class="price-tag trending">$30 <span>Trending</span></div>
+        <a href="https://wa.me/9079216393?text=Hi,%20I'm%20interested%20in%20Video%20Editing%20service" class="buy-btn" target="_blank">Buy Now <i class="fab fa-whatsapp"></i></a>
       </div>
-    </div>
-  </div>
-</div>
-<!-- Social Media Chatbot -->
-<div class="social-chatbot">
-  <div class="social-chatbot-icon" id="socialChatbotIcon">
-    <i class="fas fa-comment-alt"></i>
-    <span class="social-label"/>🤨</span>
-  </div>
-  
-  <div class="social-chatbot-popup" id="socialChatbotPopup">
-    <div class="social-chatbot-header">
-      <h3>Connect With Me</h3>
-      <button class="close-social-chatbot" id="closeSocialChatbot">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    
-    <div class="social-chatbot-body">
-      <div class="social-cards">
-        <!-- Instagram Card -->
-        <div class="social-card instagram-card">
-          <div class="social-card-icon">
-            <i class="fab fa-instagram"></i>
-          </div>
-          <h4>themanohar_singh</h4>
-          <div class="social-stats">
-            <span class="followers">1.8M Followers</span>
-            <span class="verified"><i class="fas fa-check-circle"></i> Verified</span>
-          </div>
-          <a href="https://www.instagram.com/themanohar_singh" class="social-btn" target="_blank">
-            Join Now <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-        
-        <!-- Facebook Card -->
-        <div class="social-card facebook-card">
-          <div class="social-card-icon">
-            <i class="fab fa-facebook-f"></i>
-          </div>
-          <h4>Manohar Singh Rajpurohit</h4>
-          <div class="social-stats">
-            <span class="friends">25K Friends</span>
-          </div>
-          <a href="https://www.facebook.com/share/1AKdJHHdwV/" class="social-btn" target="_blank">
-            Connect <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-        
-        <!-- LinkedIn Card -->
-        <div class="social-card linkedin-card">
-          <div class="social-card-icon">
-            <i class="fab fa-linkedin-in"></i>
-          </div>
-          <h4>Manohar Singh Rajpurohit</h4>
-          <div class="social-stats">
-            <span class="connections">500+ Connections</span>
-          </div>
-          <a href="https://www.linkedin.com/in/manohar-singh-49a15b2b6" class="social-btn" target="_blank">
-            Network <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
+      <div class="service-card">
+        <div class="card-icon"><i class="fas fa-share-alt"></i></div>
+        <h4>Social Media Content</h4>
+        <div class="price-tag">$25</div>
+        <a href="https://wa.me/9079216393?text=Hi,%20I'm%20interested%20in%20Social%20Media%20Content%20service" class="buy-btn" target="_blank">Buy Now <i class="fab fa-whatsapp"></i></a>
+      </div>
+      <div class="service-card">
+        <div class="card-icon"><i class="fas fa-video"></i></div>
+        <h4>Documentary Film</h4>
+        <div class="price-tag">$45</div>
+        <a href="https://wa.me/9079216393?text=Hi,%20I'm%20interested%20in%20Documentary%20Film%20service" class="buy-btn" target="_blank">Buy Now <i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
   </div>
 </div>
 
-    <script src="script.js"></script>
-    <!-- VFX script for parallax & small interactions -->
-    <script src="vfx.js"></script>
-</body>
-</html>
+<!-- Social Connect Popup -->
+<div class="social-chatbot-popup" id="socialChatbotPopup">
+  <div class="social-chatbot-header">
+    <h3>Connect With Me</h3>
+    <button class="close-social-chatbot" id="closeSocialChatbot"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="social-chatbot-body">
+    <div class="social-cards">
+      <div class="social-card instagram-card">
+        <div class="social-card-icon"><i class="fab fa-instagram"></i></div>
+        <h4>themanohar_singh</h4>
+        <div class="social-stats"><span class="followers">1.8M Followers</span> <span class="verified"><i class="fas fa-check-circle"></i> Verified</span></div>
+        <a href="https://www.instagram.com/themanohar_singh" class="social-btn" target="_blank">Join Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="social-card facebook-card">
+        <div class="social-card-icon"><i class="fab fa-facebook-f"></i></div>
+        <h4>Manohar Singh Rajpurohit</h4>
+        <div class="social-stats"><span class="friends">25K Friends</span></div>
+        <a href="https://www.facebook.com/share/1AKdJHHdwV/" class="social-btn" target="_blank">Connect <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="social-card linkedin-card">
+        <div class="social-card-icon"><i class="fab fa-linkedin-in"></i></div>
+        <h4>Manohar Singh Rajpurohit</h4>
+        <div class="social-stats"><span class="connections">500+ Connections</span></div>
+        <a href="https://www.linkedin.com/in/manohar-singh-49a15b2b6" class="social-btn" target="_blank">Network <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer (professional) -->
+<footer class="footer" style="background:#0b0b0b;color:#ddd;padding:40px 5%;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center">
+    <div style="flex:1;min-width:220px">
+      <div style="font-weight:700;font-size:1.1rem">Manohar Singh</div>
+      <div style="font-size:0.95rem;margin-top:6px">© 
