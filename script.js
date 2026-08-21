@@ -116,11 +116,11 @@ const questions = [
 ];
 
 const answers = [
-    "मैं सिनेमैटिक एडिटिंग और डायनामिक ट्रांजिशन्स में स्पेशलाइज्ड हूं, स्टोरीटेलिंग पर फोकस करता हूं।",
+    "मैं सिनेमैटिक एडिटिंग और डायनामिक ट्रांजिशन्स में स्पेशलाइज्ड हूं, स्ट[...]",
     "Adobe Premiere Pro, After Effects, DaVinci Resolve और Final Cut Pro में काम करता हूं।",
     "50+ घंटे के रॉ फुटेज से 5-मिनट की डॉक्यूमेंट्री बनाना मेरा सबसे चैलेंजिंग प्रोजेक्ट था।",
     "DaVinci Resolve में LUTs यूज़ करता हूं, मैन्युअल कलर करेक्शन और मूड के हिसाब से ग्रेडिंग करता हूं।",
-    "ब्रीफिंग → फुटेज लॉग → रफ कट → फाइनल एडिट → कलर ग्रेडिंग → साउंड डिज़ाइन → डिलीवरी।",
+    "ब्रीफिंग → फुटेज लॉग → रफ कट → फाइनल एडिट → कलर ग्रेडिंग → साउंड डिज़ाइन।",
     "फास्ट-पेस्ड एडिट्स, बीट-सिंक्ड ट्रांजिशन्स और अटेंशन-ग्रैबिंग ओपनिंग पर फोकस करता हूं।",
     "मुझे क्रिएटिव स्टोरीटेलिंग और हाई-एनर्जी कमर्शियल दोनों प्रोजेक्ट्स पसंद हैं।",
     "प्रोजेक्ट को छोटे टास्क्स में बाँटकर टाइम मैनेजमेंट टूल्स का यूज़ करता हूं।",
@@ -136,11 +136,12 @@ questions.forEach((question, index) => {
     questionItem.addEventListener('click', () => {
         showAnswer(index);
     });
-    questionList.appendChild(questionItem);
+    if (questionList) questionList.appendChild(questionItem);
 });
 
 function showAnswer(index) {
     // Clear previous answers
+    if (!answersContainer) return;
     answersContainer.innerHTML = '';
     
     // Create and show the selected answer
@@ -154,21 +155,24 @@ function showAnswer(index) {
 }
 
 // Toggle chat box
-chatIcon.addEventListener('click', () => {
-    chatBox.classList.toggle('active');
-});
+if (chatIcon && chatBox) {
+  chatIcon.addEventListener('click', () => {
+      chatBox.classList.toggle('active');
+  });
+}
 
-closeChat.addEventListener('click', () => {
-    chatBox.classList.remove('active');
-});
+if (closeChat && chatBox) {
+  closeChat.addEventListener('click', () => {
+      chatBox.classList.remove('active');
+  });
+}
 
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
 });
 
@@ -178,30 +182,34 @@ document.addEventListener('DOMContentLoaded', function() {
   const chatbotPopup = document.getElementById('chatbotPopup');
   const closeChatbot = document.getElementById('closeChatbot');
   
-  // Toggle with better animation
-  chatbotIcon.addEventListener('click', function() {
-    if(chatbotPopup.classList.contains('active')) {
-      chatbotPopup.classList.remove('active');
-    } else {
-      // Close any other open popups first
-      document.querySelectorAll('.chatbot-popup.active').forEach(popup => {
-        popup.classList.remove('active');
-      });
-      chatbotPopup.classList.add('active');
-    }
-  });
+  if (chatbotIcon && chatbotPopup) {
+    // Toggle with better animation
+    chatbotIcon.addEventListener('click', function() {
+      if(chatbotPopup.classList.contains('active')) {
+        chatbotPopup.classList.remove('active');
+      } else {
+        // Close any other open popups first
+        document.querySelectorAll('.chatbot-popup.active').forEach(popup => {
+          popup.classList.remove('active');
+        });
+        chatbotPopup.classList.add('active');
+      }
+    });
+  }
   
-  // Smooth close
-  closeChatbot.addEventListener('click', function() {
-    chatbotPopup.classList.add('closing');
-    setTimeout(() => {
-      chatbotPopup.classList.remove('active', 'closing');
-    }, 300);
-  });
+  if (closeChatbot && chatbotPopup) {
+    // Smooth close
+    closeChatbot.addEventListener('click', function() {
+      chatbotPopup.classList.add('closing');
+      setTimeout(() => {
+        chatbotPopup.classList.remove('active', 'closing');
+      }, 300);
+    });
+  }
   
   // Better outside click handling
   document.addEventListener('click', function(event) {
-    if (!event.target.closest('.chatbot-widget')) {
+    if (!event.target.closest('.chatbot-popup') && chatbotPopup) {
       chatbotPopup.classList.add('closing');
       setTimeout(() => {
         chatbotPopup.classList.remove('active', 'closing');
@@ -215,22 +223,65 @@ document.addEventListener('DOMContentLoaded', function() {
   const socialChatbotPopup = document.getElementById('socialChatbotPopup');
   const closeSocialChatbot = document.getElementById('closeSocialChatbot');
   
-  // Toggle social chatbot popup
-  socialChatbotIcon.addEventListener('click', function() {
-    socialChatbotPopup.classList.toggle('active');
-  });
+  if (socialChatbotIcon && socialChatbotPopup) {
+    // Toggle social chatbot popup
+    socialChatbotIcon.addEventListener('click', function() {
+      socialChatbotPopup.classList.toggle('active');
+    });
+  }
   
-  // Close social chatbot popup
-  closeSocialChatbot.addEventListener('click', function() {
-    socialChatbotPopup.classList.remove('active');
-  });
+  if (closeSocialChatbot && socialChatbotPopup) {
+    // Close social chatbot popup
+    closeSocialChatbot.addEventListener('click', function() {
+      socialChatbotPopup.classList.remove('active');
+    });
+  }
   
   // Close when clicking outside
   document.addEventListener('click', function(event) {
-    if (!socialChatbotPopup.contains(event.target) && 
+    if (socialChatbotPopup && !socialChatbotPopup.contains(event.target) && 
         event.target !== socialChatbotIcon &&
         !socialChatbotIcon.contains(event.target)) {
       socialChatbotPopup.classList.remove('active');
     }
+  });
+});
+
+// --- Added handlers: open/close popups from sidebar & service, and hide floating widgets ---
+function openCreativeServicePopup(){
+  const p = document.getElementById('chatbotPopup');
+  if(p) p.classList.add('active');
+}
+function closeCreativeServicePopup(){
+  const p = document.getElementById('chatbotPopup');
+  if(p) p.classList.remove('active');
+}
+function openSocialPopup(){
+  const p = document.getElementById('socialChatbotPopup');
+  if(p) p.classList.add('active');
+}
+function closeSocialPopup(){
+  const p = document.getElementById('socialChatbotPopup');
+  if(p) p.classList.remove('active');
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  const s1 = document.getElementById('openChatbotFromSidebar');
+  const s2 = document.getElementById('openChatbotFromService');
+  const s3 = document.getElementById('openSocialFromSidebar');
+
+  if(s1) s1.addEventListener('click', openCreativeServicePopup);
+  if(s2) s2.addEventListener('click', openCreativeServicePopup);
+  if(s3) s3.addEventListener('click', openSocialPopup);
+
+  const closeChat = document.getElementById('closeChatbot');
+  if(closeChat) closeChat.addEventListener('click', closeCreativeServicePopup);
+
+  const closeSocial = document.getElementById('closeSocialChatbot');
+  if(closeSocial) closeSocial.addEventListener('click', closeSocialPopup);
+
+  // hide old floating widgets so they don't overlap content
+  document.querySelectorAll('.chat-widget, .chatbot-widget, .social-chatbot').forEach(el=>{
+    if(el) el.style.display = 'none';
   });
 });
