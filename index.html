@@ -16,8 +16,7 @@
         <!-- Desktop Navigation -->
         <ul class="nav-links">
             <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
-            <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+            <li><a href="#about-skills"><i class="fas fa-user"></i> About</a></li>
             <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
             <li><a href="#service"><i class="fas fa-handshake"></i> My Service</a></li>
         </ul>
@@ -28,7 +27,7 @@
         </div>
         
         <!-- Mobile Hamburger Button -->
-        <div class="hamburger" id="hamburger">
+        <div class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
             <i class="fas fa-bars"></i>
         </div>
     </nav>
@@ -37,15 +36,14 @@
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3>Menu</h3>
-            <button class="close-btn" id="close-btn">
+            <button class="close-btn" id="close-btn" aria-label="Close menu">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         
         <div class="sidebar-links">
             <a href="#home" class="sidebar-link"><i class="fas fa-home"></i> Home</a>
-            <a href="#about" class="sidebar-link"><i class="fas fa-user"></i> About</a>
-            <a href="#skills" class="sidebar-link"><i class="fas fa-code"></i> Skills</a>
+            <a href="#about-skills" class="sidebar-link"><i class="fas fa-user"></i> About</a>
             <a href="#projects" class="sidebar-link"><i class="fas fa-project-diagram"></i> Projects</a>
             <a href="#service" class="sidebar-link"><i class="fas fa-handshake"></i> My Service</a>
             <button class="sidebar-link sidebar-trigger" id="openChatbotFromSidebar"><i class="fas fa-comment-dots"></i> Creative Services</button>
@@ -76,51 +74,32 @@
     </div>
 </section>
 
-<!-- About Section -->
-<section id="about" class="about">
-    <h2>About Me</h2>
-    <div class="about-content">
-        <div class="about-text">
-            <h3>Manohar Singh</h3>
-            <p>Professional Video Editor with 3+ years of experience in cinematic storytelling and dynamic transitions.</p>
-            <p>Specialized in Adobe Premiere Pro, After Effects, and DaVinci Resolve for high-quality edits.</p>
-            <div class="skills-tags">
-                <span>Video Editing</span>
-                <span>Color Grading</span>
-                <span>Motion Graphics</span>
-            </div>
-        </div>
-        <div class="about-image">
-            <img 
-                src="Img/p1.jpg" 
-                alt="Manohar Singh - Video Editor" 
-                class="profile-img"
-                onerror="this.src='https://via.placeholder.com/400x400?text=Profile+Image';"
-            >
-        </div>
-    </div>
-</section>
+<!-- About & Skills (combined) -->
+<section id="about-skills" class="about-skills">
+  <div class="about-skills-inner">
+    <div class="about-left">
+      <h2>About Me</h2>
+      <h3>Manohar Singh</h3>
+      <p>Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading. I deliver fast, clean edits with creative motion work when needed.</p>
 
-<!-- Skills Section -->
-<section id="skills" class="skills">
-    <h2>My Skills</h2>
-    <div class="skills-container">
-        <div class="skill-card">
-            <i class="fas fa-film"></i>
-            <h3>Video Editing</h3>
-            <p>Adobe Premiere Pro, Final Cut Pro</p>
-        </div>
-        <div class="skill-card">
-            <i class="fas fa-magic"></i>
-            <h3>Visual Effects</h3>
-            <p>After Effects, DaVinci Resolve</p>
-        </div>
-        <div class="skill-card">
-            <i class="fas fa-palette"></i>
-            <h3>Color Grading</h3>
-            <p>LUTs, Manual Correction</p>
-        </div>
+      <div class="skills-tags compact">
+        <span>Video Editing</span>
+        <span>Color Grading</span>
+        <span>Motion Graphics</span>
+        <span>VFX</span>
+        <span>Audio Design</span>
+      </div>
+
+      <div style="margin-top:18px">
+        <a class="buy-btn" href="#service">See Services</a>
+        <a class="vfx-btn vfx-outline" href="project-detail.html" style="margin-left:10px">View Case Study</a>
+      </div>
     </div>
+
+    <div class="about-right">
+      <img src="Img/p1.jpg" alt="Manohar Singh" class="profile-img" onerror="this.src='https://via.placeholder.com/400x400?text=Profile+Image'">
+    </div>
+  </div>
 </section>
 
 <!-- Projects Section -->
