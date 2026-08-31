@@ -1,0 +1,108 @@
+{
+  "profile": {
+    "name": "Manohar Singh",
+    "title": "Professional Video Editor",
+    "bio": "Creating cinematic experiences through dynamic editing — cuts, VFX, color grading and motion graphics that tell your story.",
+    "image": "Img/p1.jpg",
+    "fallbackImage": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+    "about": "Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading. I deliver fast, clean edits with creative motion work when needed."
+  },
+
+  "skills": [
+    "Video Editing",
+    "Color Grading",
+    "Motion Graphics",
+    "VFX",
+    "Audio Design"
+  ],
+
+  "projects": [
+    {
+      "id": 1,
+      "title": "Documentary Film",
+      "description": "50+ hours of raw footage edited into 5-minute documentary",
+      "image": "Img/m1.jpg",
+      "link": "project-detail.html",
+      "category": "documentary"
+    },
+    {
+      "id": 2,
+      "title": "Commercial Ad",
+      "description": "High-energy product advertisement",
+      "image": "Img/m2.jpg",
+      "link": "project-detail.html",
+      "category": "commercial"
+    },
+    {
+      "id": 3,
+      "title": "Social Media Content",
+      "description": "Trending reels and shorts",
+      "image": "Img/m3.jpg",
+      "link": "project-detail.html",
+      "category": "social"
+    }
+  ],
+
+  "services": [
+    {
+      "id": 1,
+      "title": "Video Editing",
+      "icon": "fas fa-film",
+      "price": 30,
+      "trending": true,
+      "whatsapp": "9079216393",
+      "whatsappText": "Hi, I'm interested in Video Editing service"
+    },
+    {
+      "id": 2,
+      "title": "Social Media Content",
+      "icon": "fas fa-share-alt",
+      "price": 25,
+      "trending": false,
+      "whatsapp": "9079216393",
+      "whatsappText": "Hi, I'm interested in Social Media Content service"
+    },
+    {
+      "id": 3,
+      "title": "Documentary Film",
+      "icon": "fas fa-video",
+      "price": 45,
+      "trending": false,
+      "whatsapp": "9079216393",
+      "whatsappText": "Hi, I'm interested in Documentary Film service"
+    }
+  ],
+
+  "social": [
+    {
+      "platform": "instagram",
+      "handle": "themanohar_singh",
+      "url": "https://www.instagram.com/themanohar_singh",
+      "stats": "1.8M Followers",
+      "verified": true,
+      "icon": "fab fa-instagram"
+    },
+    {
+      "platform": "facebook",
+      "handle": "Manohar Singh Rajpurohit",
+      "url": "https://www.facebook.com/share/1AKdJHHdwV/",
+      "stats": "25K Friends",
+      "verified": false,
+      "icon": "fab fa-facebook-f"
+    },
+    {
+      "platform": "linkedin",
+      "handle": "Manohar Singh Rajpurohit",
+      "url": "https://www.linkedin.com/in/manohar-singh-49a15b2b6",
+      "stats": "500+ Connections",
+      "verified": false,
+      "icon": "fab fa-linkedin-in"
+    }
+  ],
+
+  "contact": {
+    "whatsapp": "9079216393",
+    "email": "your-email@example.com",
+    "phone": "+91-9079216393"
+  }
+}
