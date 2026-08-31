@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .admin-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .admin-header h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .admin-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #f0f0f0;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            min-width: 150px;
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .btn-danger {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #ff5252;
+        }
+
+        .item-card {
+            background: #f8f9ff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-card h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .item-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-button {
+                min-width: 100px;
+                font-size: 0.9rem;
+            }
+
+            .admin-container {
+                margin-top: 20px;
+            }
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+        }
+
+        .instruction {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .instruction strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1><i class="fas fa-sliders-h"></i> Portfolio Admin Panel</h1>
+            <p>Edit your portfolio content easily without touching code</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab(event, 'profile')">
+                <i class="fas fa-user"></i> Profile
+            </button>
+            <button class="tab-button" onclick="switchTab(event, 'projects')">
+                <i class="fas fa-project-diagram"></i> Projects
+            </button>
+            <button class="tab-button" onclick="switchTab(event, 'services')">
+                <i class="fas fa-handshake"></i> Services
+            </button>
+            <button class="tab-button" onclick="switchTab(event, 'social')">
+                <i class="fas fa-share-alt"></i> Social
+            </button>
+            <button class="tab-button" onclick="switchTab(event, 'contact')">
+                <i class="fas fa-phone"></i> Contact
+            </button>
+            <button class="tab-button" onclick="switchTab(event, 'export')">
+                <i class="fas fa-download"></i> Export
+            </button>
+        </div>
+
+        <!-- PROFILE TAB -->
+        <div id="profile" class="tab-content active">
+            <div class="success-message" id="profileSuccess">✓ Profile updated successfully!</div>
+            <h2>Edit Your Profile</h2>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="profileName" value="Manohar Singh">
+            </div>
+            <div class="form-group">
+                <label>Professional Title</label>
+                <input type="text" id="profileTitle" value="Professional Video Editor">
+            </div>
+            <div class="form-group">
+                <label>Bio (Short)</label>
+                <textarea id="profileBio">Creating cinematic experiences through dynamic editing — cuts, VFX, color grading and motion graphics that tell your story.</textarea>
+            </div>
+            <div class="form-group">
+                <label>About Me (Long)</label>
+                <textarea id="profileAbout">Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading. I deliver fast, clean edits with creative motion work when needed.</textarea>
+            </div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Profile Image URL</label>
+                    <input type="text" id="profileImage" value="Img/p1.jpg">
+                </div>
+                <div class="form-group">
+                    <label>Fallback Image URL</label>
+                    <input type="text" id="profileFallback" value="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Skills (comma-separated)</label>
+                <input type="text" id="skills" value="Video Editing, Color Grading, Motion Graphics, VFX, Audio Design">
+            </div>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="updateProfile()">
+                    <i class="fas fa-save"></i> Save Profile
+                </button>
+                <button class="btn btn-secondary" onclick="downloadJSON()">
+                    <i class="fas fa-download"></i> Download Data
+                </button>
+            </div>
+        </div>
+
+        <!-- PROJECTS TAB -->
+        <div id="projects" class="tab-content">
+            <div class="success-message" id="projectsSuccess">✓ Projects updated successfully!</div>
+            <h2>Manage Your Projects</h2>
+            <div class="instruction">
+                <strong><i class="fas fa-info-circle"></i> How to add projects:</strong> Fill the form below and click "Add Project". You can add unlimited projects!
+            </div>
+            <div id="projectsList"></div>
+            <div style="background: #f8f9ff; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                <h3>Add New Project</h3>
+                <div class="form-group">
+                    <label>Project Title</label>
+                    <input type="text" id="newProjectTitle" placeholder="E.g., Wedding Highlights">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="newProjectDesc" placeholder="Describe your project..."></textarea>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Image URL</label>
+                        <input type="text" id="newProjectImage" placeholder="E.g., Img/project.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <input type="text" id="newProjectCategory" placeholder="E.g., wedding, commercial, music">
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addProject()">
+                    <i class="fas fa-plus"></i> Add Project
+                </button>
+            </div>
+        </div>
+
+        <!-- SERVICES TAB -->
+        <div id="services" class="tab-content">
+            <div class="success-message" id="servicesSuccess">✓ Services updated successfully!</div>
+            <h2>Manage Your Services</h2>
+            <div id="servicesList"></div>
+            <div style="background: #f8f9ff; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                <h3>Add New Service</h3>
+                <div class="form-group">
+                    <label>Service Title</label>
+                    <input type="text" id="newServiceTitle" placeholder="E.g., Animation Services">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Price ($)</label>
+                        <input type="number" id="newServicePrice" placeholder="50" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Icon (Font Awesome)</label>
+                        <input type="text" id="newServiceIcon" placeholder="E.g., fas fa-film">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="newServiceTrending"> Mark as Trending
+                    </label>
+                </div>
+                <button class="btn btn-primary" onclick="addService()">
+                    <i class="fas fa-plus"></i> Add Service
+                </button>
+            </div>
+        </div>
+
+        <!-- SOCIAL TAB -->
+        <div id="social" class="tab-content">
+            <div class="success-message" id="socialSuccess">✓ Social links updated successfully!</div>
+            <h2>Manage Your Social Links</h2>
+            <div id="socialList"></div>
+            <div style="background: #f8f9ff; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                <h3>Add New Social Link</h3>
+                <div class="form-group">
+                    <label>Platform Name</label>
+                    <input type="text" id="newSocialPlatform" placeholder="E.g., YouTube, Twitter">
+                </div>
+                <div class="form-group">
+                    <label>Handle/Username</label>
+                    <input type="text" id="newSocialHandle" placeholder="E.g., @your_handle">
+                </div>
+                <div class="form-group">
+                    <label>Profile URL</label>
+                    <input type="url" id="newSocialUrl" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label>Stats</label>
+                    <input type="text" id="newSocialStats" placeholder="E.g., 100K Followers">
+                </div>
+                <div class="form-group">
+                    <label>Icon (Font Awesome)</label>
+                    <input type="text" id="newSocialIcon" placeholder="E.g., fab fa-youtube">
+                </div>
+                <button class="btn btn-primary" onclick="addSocial()">
+                    <i class="fas fa-plus"></i> Add Social Link
+                </button>
+            </div>
+        </div>
+
+        <!-- CONTACT TAB -->
+        <div id="contact" class="tab-content">
+            <div class="success-message" id="contactSuccess">✓ Contact info updated successfully!</div>
+            <h2>Contact Information</h2>
+            <div class="form-group">
+                <label>WhatsApp Number</label>
+                <input type="text" id="contactWhatsapp" value="9079216393" placeholder="+91 your number">
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="contactEmail" value="your-email@example.com">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="contactPhone" value="+91-9079216393">
+            </div>
+            <button class="btn btn-primary" onclick="updateContact()">
+                <i class="fas fa-save"></i> Save Contact Info
+            </button>
+        </div>
+
+        <!-- EXPORT TAB -->
+        <div id="export" class="tab-content">
+            <h2>Export Your Data</h2>
+            <p style="margin-bottom: 20px; color: #666;">Download your portfolio data as JSON. You can use this to backup or migrate your portfolio.</p>
+            <button class="btn btn-primary" onclick="downloadFullJSON()">
+                <i class="fas fa-download"></i> Download Complete Data (JSON)
+            </button>
+            <div style="margin-top: 30px;">
+                <h3>How to use the data:</h3>
+                <ol style="line-height: 1.8; color: #555;">
+                    <li>Click "Download Complete Data" to save your portfolio data</li>
+                    <li>Keep this JSON file safe as a backup</li>
+                    <li>You can upload it to your repository or use with any portfolio</li>
+                    <li>The portfolio will automatically load from <strong>data.json</strong></li>
+                </ol>
+            </div>
+            <div class="code-block" style="margin-top: 20px;">
+            Your data structure is ready! Visit your portfolio to see the changes.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global data object
+        let portfolioData = {};
+
+        // Load portfolio data from data.json
+        async function loadPortfolioData() {
+            try {
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error('Failed to load data.json');
+                portfolioData = await response.json();
+                renderPortfolio();
+            } catch (error) {
+                console.error('Error loading portfolio data:', error);
+                // Use default data if file not found
+                loadDefaultData();
+            }
+        }
+
+        // Default data fallback
+        function loadDefaultData() {
+            portfolioData = {
+                profile: {
+                    name: "Manohar Singh",
+                    title: "Professional Video Editor",
+                    bio: "Creating cinematic experiences through dynamic editing — cuts, VFX, color grading and motion graphics that tell your story.",
+                    image: "Img/p1.jpg",
+                    fallbackImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+                    about: "Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading."
+                },
+                skills: ["Video Editing", "Color Grading", "Motion Graphics", "VFX", "Audio Design"],
+                projects: [],
+                services: [],
+                social: [],
+                contact: { whatsapp: "9079216393", email: "your-email@example.com", phone: "+91-9079216393" }
+            };
+            renderPortfolio();
+        }
+
+        // Render all portfolio content
+        function renderPortfolio() {
+            renderProfile();
+            renderProjects();
+            renderServices();
+            renderSocial();
+        }
+
+        // Render Profile Section
+        function renderProfile() {
+            const profile = portfolioData.profile;
+            document.getElementById('profileName').value = profile.name;
+            document.getElementById('profileTitle').value = profile.title;
+            document.getElementById('profileBio').value = profile.bio;
+            document.getElementById('profileAbout').value = profile.about;
+            document.getElementById('profileImage').value = profile.image;
+            document.getElementById('profileFallback').value = profile.fallbackImage;
+            document.getElementById('skills').value = portfolioData.skills.join(', ');
+        }
+
+        // Render Projects
+        function renderProjects() {
+            const projectsList = document.getElementById('projectsList');
+            projectsList.innerHTML = '';
+            portfolioData.projects.forEach((project, index) => {
+                projectsList.innerHTML += `
+                    <div class="item-card">
+                        <div>
+                            <h4>${project.title}</h4>
+                            <p>${project.description.substring(0, 50)}...</p>
+                        </div>
+                        <button class="btn btn-danger" onclick="deleteProject(${index})">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        // Render Services
+        function renderServices() {
+            const servicesList = document.getElementById('servicesList');
+            servicesList.innerHTML = '';
+            portfolioData.services.forEach((service, index) => {
+                servicesList.innerHTML += `
+                    <div class="item-card">
+                        <div>
+                            <h4>$${service.price} - ${service.title}</h4>
+                            <p>${service.trending ? '🔥 Trending' : ''}</p>
+                        </div>
+                        <button class="btn btn-danger" onclick="deleteService(${index})">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        // Render Social Links
+        function renderSocial() {
+            const socialList = document.getElementById('socialList');
+            socialList.innerHTML = '';
+            portfolioData.social.forEach((social, index) => {
+                socialList.innerHTML += `
+                    <div class="item-card">
+                        <div>
+                            <h4>${social.platform}</h4>
+                            <p>${social.handle} - ${social.stats}</p>
+                        </div>
+                        <button class="btn btn-danger" onclick="deleteSocial(${index})">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function updateProfile() {
+            portfolioData.profile.name = document.getElementById('profileName').value;
+            portfolioData.profile.title = document.getElementById('profileTitle').value;
+            portfolioData.profile.bio = document.getElementById('profileBio').value;
+            portfolioData.profile.about = document.getElementById('profileAbout').value;
+            portfolioData.profile.image = document.getElementById('profileImage').value;
+            portfolioData.profile.fallbackImage = document.getElementById('profileFallback').value;
+            portfolioData.skills = document.getElementById('skills').value.split(',').map(s => s.trim());
+            saveData();
+            showSuccess('profileSuccess');
+        }
+
+        function addProject() {
+            const title = document.getElementById('newProjectTitle').value;
+            const description = document.getElementById('newProjectDesc').value;
+            const image = document.getElementById('newProjectImage').value;
+            const category = document.getElementById('newProjectCategory').value;
+
+            if (title && description && image) {
+                portfolioData.projects.push({
+                    id: Date.now(),
+                    title,
+                    description,
+                    image,
+                    link: "project-detail.html",
+                    category: category || "general"
+                });
+                saveData();
+                renderProjects();
+                document.getElementById('newProjectTitle').value = '';
+                document.getElementById('newProjectDesc').value = '';
+                document.getElementById('newProjectImage').value = '';
+                document.getElementById('newProjectCategory').value = '';
+                showSuccess('projectsSuccess');
+            } else {
+                alert('Please fill all fields');
+            }
+        }
+
+        function deleteProject(index) {
+            if (confirm('Delete this project?')) {
+                portfolioData.projects.splice(index, 1);
+                saveData();
+                renderProjects();
+                showSuccess('projectsSuccess');
+            }
+        }
+
+        function addService() {
+            const title = document.getElementById('newServiceTitle').value;
+            const price = parseFloat(document.getElementById('newServicePrice').value);
+            const icon = document.getElementById('newServiceIcon').value;
+            const trending = document.getElementById('newServiceTrending').checked;
+
+            if (title && price) {
+                portfolioData.services.push({
+                    id: Date.now(),
+                    title,
+                    icon: icon || "fas fa-star",
+                    price,
+                    trending,
+                    whatsapp: portfolioData.contact.whatsapp,
+                    whatsappText: `Hi, I'm interested in ${title} service`
+                });
+                saveData();
+                renderServices();
+                document.getElementById('newServiceTitle').value = '';
+                document.getElementById('newServicePrice').value = '';
+                document.getElementById('newServiceIcon').value = '';
+                document.getElementById('newServiceTrending').checked = false;
+                showSuccess('servicesSuccess');
+            } else {
+                alert('Please fill all required fields');
+            }
+        }
+
+        function deleteService(index) {
+            if (confirm('Delete this service?')) {
+                portfolioData.services.splice(index, 1);
+                saveData();
+                renderServices();
+                showSuccess('servicesSuccess');
+            }
+        }
+
+        function addSocial() {
+            const platform = document.getElementById('newSocialPlatform').value;
+            const handle = document.getElementById('newSocialHandle').value;
+            const url = document.getElementById('newSocialUrl').value;
+            const stats = document.getElementById('newSocialStats').value;
+            const icon = document.getElementById('newSocialIcon').value;
+
+            if (platform && handle && url) {
+                portfolioData.social.push({
+                    platform: platform.toLowerCase(),
+                    handle,
+                    url,
+                    stats: stats || "Follow",
+                    verified: false,
+                    icon: icon || "fas fa-link"
+                });
+                saveData();
+                renderSocial();
+                document.getElementById('newSocialPlatform').value = '';
+                document.getElementById('newSocialHandle').value = '';
+                document.getElementById('newSocialUrl').value = '';
+                document.getElementById('newSocialStats').value = '';
+                document.getElementById('newSocialIcon').value = '';
+                showSuccess('socialSuccess');
+            } else {
+                alert('Please fill all required fields');
+            }
+        }
+
+        function deleteSocial(index) {
+            if (confirm('Delete this social link?')) {
+                portfolioData.social.splice(index, 1);
+                saveData();
+                renderSocial();
+                showSuccess('socialSuccess');
+            }
+        }
+
+        function updateContact() {
+            portfolioData.contact.whatsapp = document.getElementById('contactWhatsapp').value;
+            portfolioData.contact.email = document.getElementById('contactEmail').value;
+            portfolioData.contact.phone = document.getElementById('contactPhone').value;
+            saveData();
+            showSuccess('contactSuccess');
+        }
+
+        function downloadJSON() {
+            const dataStr = JSON.stringify(portfolioData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'portfolio-data.json';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function downloadFullJSON() {
+            downloadJSON();
+        }
+
+        function saveData() {
+            localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
+        }
+
+        function showSuccess(elementId) {
+            const el = document.getElementById(elementId);
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 3000);
+        }
+
+        function switchTab(event, tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.closest('.tab-button').classList.add('active');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPortfolioData();
+        });
+    </script>
+</body>
+</html>
