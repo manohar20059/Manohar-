@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manohar Singh - Video Editor Portfolio</title>
+    <title id="pageTitle">Manohar Singh - Video Editor Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="vfx.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,7 +11,7 @@
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="logo">Manohar Singh</div>
+        <div class="logo" id="navLogo">Manohar Singh</div>
         
         <!-- Desktop Navigation -->
         <ul class="nav-links">
@@ -19,6 +19,7 @@
             <li><a href="#about-skills"><i class="fas fa-user"></i> About</a></li>
             <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
             <li><a href="#service"><i class="fas fa-handshake"></i> My Service</a></li>
+            <li><a href="config.html" target="_blank" title="Edit Portfolio"><i class="fas fa-cog"></i> Edit</a></li>
         </ul>
         
         <!-- Theme Toggle -->
@@ -48,6 +49,7 @@
             <a href="#service" class="sidebar-link"><i class="fas fa-handshake"></i> My Service</a>
             <button class="sidebar-link sidebar-trigger" id="openChatbotFromSidebar"><i class="fas fa-comment-dots"></i> Creative Services</button>
             <button class="sidebar-link sidebar-trigger" id="openSocialFromSidebar"><i class="fas fa-share-alt"></i> Connect</button>
+            <a href="config.html" target="_blank" class="sidebar-link"><i class="fas fa-cog"></i> Edit Portfolio</a>
         </div>
     </aside>
 
@@ -56,9 +58,9 @@
 <section id="home" class="hero vfx-hero">
     <div class="vfx-container">
         <div class="vfx-left">
-            <div class="eyebrow">Hi! I Am <strong>Manohar Singh</strong></div>
-            <h1 class="vfx-title">Professional Video Editor</h1>
-            <p class="vfx-lead">Creating cinematic experiences through dynamic editing — cuts, VFX, color grading and motion graphics that tell your story.</p>
+            <div class="eyebrow">Hi! I Am <strong id="heroName">Manohar Singh</strong></div>
+            <h1 class="vfx-title" id="heroTitle">Professional Video Editor</h1>
+            <p class="vfx-lead" id="heroBio">Creating cinematic experiences through dynamic editing — cuts, VFX, color grading and motion graphics that tell your story.</p>
 
             <div class="vfx-buttons">
                 <a class="vfx-btn vfx-primary" href="#service">Hire Me</a>
@@ -68,7 +70,7 @@
 
         <div class="vfx-right">
             <div class="portrait" id="portrait">
-                <img src="Img/p1.jpg" alt="profile" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80'">
+                <img id="heroImage" src="Img/p1.jpg" alt="profile" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80'">
             </div>
         </div>
     </div>
@@ -79,10 +81,10 @@
   <div class="about-skills-inner">
     <div class="about-left">
       <h2>About Me</h2>
-      <h3>Manohar Singh</h3>
-      <p>Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading. I deliver fast, clean edits with creative motion work when needed.</p>
+      <h3 id="aboutName">Manohar Singh</h3>
+      <p id="aboutText">Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading. I deliver fast, clean edits with creative motion work when needed.</p>
 
-      <div class="skills-tags compact">
+      <div class="skills-tags compact" id="skillsTags">
         <span>Video Editing</span>
         <span>Color Grading</span>
         <span>Motion Graphics</span>
@@ -97,7 +99,7 @@
     </div>
 
     <div class="about-right">
-      <img src="Img/p1.jpg" alt="Manohar Singh" class="profile-img" onerror="this.src='https://via.placeholder.com/400x400?text=Profile+Image'">
+      <img id="aboutImage" src="Img/p1.jpg" alt="Manohar Singh" class="profile-img" onerror="this.src='https://via.placeholder.com/400x400?text=Profile+Image'">
     </div>
   </div>
 </section>
@@ -105,30 +107,8 @@
 <!-- Projects Section -->
 <section id="projects" class="projects">
     <h2>My Projects</h2>
-    <div class="projects-grid">
-        <a href="project-detail.html" class="project-card-link">
-          <div class="project-card">
-              <img src="Img/m1.jpg" alt="Documentary Film Editing" class="project-img">
-              <h3>Documentary Film</h3>
-              <p>50+ hours of raw footage edited into 5-minute documentary</p>
-          </div>
-        </a>
-
-        <a href="project-detail.html" class="project-card-link">
-          <div class="project-card">
-              <img src="Img/m2.jpg" alt="Commercial Advertisement" class="project-img">
-              <h3>Commercial Ad</h3>
-              <p>High-energy product advertisement</p>
-          </div>
-        </a>
-
-        <a href="project-detail.html" class="project-card-link">
-          <div class="project-card">
-              <img src="Img/m3.jpg" alt="Social Media Reels" class="project-img">
-              <h3>Social Media Content</h3>
-              <p>Trending reels and shorts</p>
-          </div>
-        </a>
+    <div class="projects-grid" id="projectsGrid">
+        <!-- Dynamically loaded from data.json -->
     </div>
 </section>
 
@@ -155,25 +135,8 @@
     </button>
   </div>
   <div class="chatbot-body">
-    <div class="service-cards">
-      <div class="service-card">
-        <div class="card-icon"><i class="fas fa-film"></i></div>
-        <h4>Video Editing</h4>
-        <div class="price-tag trending">$30 <span>Trending</span></div>
-        <a href="https://wa.me/9079216393?text=Hi,%20I'm%20interested%20in%20Video%20Editing%20service" class="buy-btn" target="_blank">Buy Now <i class="fab fa-whatsapp"></i></a>
-      </div>
-      <div class="service-card">
-        <div class="card-icon"><i class="fas fa-share-alt"></i></div>
-        <h4>Social Media Content</h4>
-        <div class="price-tag">$25</div>
-        <a href="https://wa.me/9079216393?text=Hi,%20I'm%20interested%20in%20Social%20Media%20Content%20service" class="buy-btn" target="_blank">Buy Now <i class="fab fa-whatsapp"></i></a>
-      </div>
-      <div class="service-card">
-        <div class="card-icon"><i class="fas fa-video"></i></div>
-        <h4>Documentary Film</h4>
-        <div class="price-tag">$45</div>
-        <a href="https://wa.me/9079216393?text=Hi,%20I'm%20interested%20in%20Documentary%20Film%20service" class="buy-btn" target="_blank">Buy Now <i class="fab fa-whatsapp"></i></a>
-      </div>
+    <div class="service-cards" id="serviceCards">
+      <!-- Dynamically loaded from data.json -->
     </div>
   </div>
 </div>
@@ -185,25 +148,8 @@
     <button class="close-social-chatbot" id="closeSocialChatbot"><i class="fas fa-times"></i></button>
   </div>
   <div class="social-chatbot-body">
-    <div class="social-cards">
-      <div class="social-card instagram-card">
-        <div class="social-card-icon"><i class="fab fa-instagram"></i></div>
-        <h4>themanohar_singh</h4>
-        <div class="social-stats"><span class="followers">1.8M Followers</span> <span class="verified"><i class="fas fa-check-circle"></i> Verified</span></div>
-        <a href="https://www.instagram.com/themanohar_singh" class="social-btn" target="_blank">Join Now <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="social-card facebook-card">
-        <div class="social-card-icon"><i class="fab fa-facebook-f"></i></div>
-        <h4>Manohar Singh Rajpurohit</h4>
-        <div class="social-stats"><span class="friends">25K Friends</span></div>
-        <a href="https://www.facebook.com/share/1AKdJHHdwV/" class="social-btn" target="_blank">Connect <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="social-card linkedin-card">
-        <div class="social-card-icon"><i class="fab fa-linkedin-in"></i></div>
-        <h4>Manohar Singh Rajpurohit</h4>
-        <div class="social-stats"><span class="connections">500+ Connections</span></div>
-        <a href="https://www.linkedin.com/in/manohar-singh-49a15b2b6" class="social-btn" target="_blank">Network <i class="fas fa-arrow-right"></i></a>
-      </div>
+    <div class="social-cards" id="socialCards">
+      <!-- Dynamically loaded from data.json -->
     </div>
   </div>
 </div>
@@ -216,8 +162,8 @@
 <footer class="footer" style="background:#0b0b0b;color:#ddd;padding:40px 5%;">
   <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center">
     <div style="flex:1;min-width:220px">
-      <div style="font-weight:700;font-size:1.1rem">Manohar Singh</div>
-      <div style="font-size:0.95rem;margin-top:6px">© <span id="yearFooter"></span> Manohar Singh. All rights reserved.</div>
+      <div style="font-weight:700;font-size:1.1rem" id="footerName">Manohar Singh</div>
+      <div style="font-size:0.95rem;margin-top:6px">© <span id="yearFooter"></span> <span id="footerNameCopy">Manohar Singh</span>. All rights reserved.</div>
       <div style="font-size:0.86rem;color:#9aa;margin-top:8px">Disclaimer: Portfolio content for demonstration. Delivery & usage terms on contract.</div>
     </div>
 
@@ -232,15 +178,216 @@
 
     <div style="flex:1;min-width:220px;text-align:right">
       <div style="font-weight:600;margin-bottom:8px">Follow</div>
-      <div style="display:flex;gap:12px;justify-content:flex-end">
-        <a href="https://www.instagram.com/themanohar_singh" style="color:inherit"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/share/1AKdJHHdwV/" style="color:inherit"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.linkedin.com/in/manohar-singh-49a15b2b6" style="color:inherit"><i class="fab fa-linkedin-in"></i></a>
+      <div style="display:flex;gap:12px;justify-content:flex-end" id="footerSocial">
+        <!-- Dynamically loaded from data.json -->
       </div>
     </div>
   </div>
 </footer>
-<script>document.getElementById('yearFooter').textContent = new Date().getFullYear();</script>
+
+<script>
+    // Global data object
+    let portfolioData = {};
+
+    // Load portfolio data from data.json
+    async function loadPortfolioData() {
+        try {
+            const response = await fetch('data.json');
+            if (!response.ok) throw new Error('Failed to load data.json');
+            portfolioData = await response.json();
+            renderPortfolio();
+        } catch (error) {
+            console.error('Error loading portfolio data:', error);
+            // Use default data if file not found
+            loadDefaultData();
+        }
+    }
+
+    // Default data fallback
+    function loadDefaultData() {
+        portfolioData = {
+            profile: {
+                name: "Manohar Singh",
+                title: "Professional Video Editor",
+                bio: "Creating cinematic experiences through dynamic editing — cuts, VFX, color grading and motion graphics that tell your story.",
+                image: "Img/p1.jpg",
+                fallbackImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+                about: "Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading."
+            },
+            skills: ["Video Editing", "Color Grading", "Motion Graphics", "VFX", "Audio Design"],
+            projects: [],
+            services: [],
+            social: [],
+            contact: { whatsapp: "9079216393", email: "your-email@example.com", phone: "+91-9079216393" }
+        };
+        renderPortfolio();
+    }
+
+    // Render all portfolio content
+    function renderPortfolio() {
+        renderProfile();
+        renderProjects();
+        renderServices();
+        renderSocial();
+        renderFooter();
+    }
+
+    // Render Profile Section
+    function renderProfile() {
+        const profile = portfolioData.profile;
+        document.getElementById('pageTitle').textContent = `${profile.name} - Video Editor Portfolio`;
+        document.getElementById('navLogo').textContent = profile.name;
+        document.getElementById('heroName').textContent = profile.name;
+        document.getElementById('heroTitle').textContent = profile.title;
+        document.getElementById('heroBio').textContent = profile.bio;
+        document.getElementById('heroImage').src = profile.image;
+        document.getElementById('heroImage').onerror = function() { this.src = profile.fallbackImage; };
+        
+        document.getElementById('aboutName').textContent = profile.name;
+        document.getElementById('aboutText').textContent = profile.about;
+        document.getElementById('aboutImage').src = profile.image;
+        document.getElementById('aboutImage').onerror = function() { this.src = profile.fallbackImage; };
+
+        // Render skills
+        const skillsContainer = document.getElementById('skillsTags');
+        skillsContainer.innerHTML = '';
+        portfolioData.skills.forEach(skill => {
+            const span = document.createElement('span');
+            span.textContent = skill;
+            skillsContainer.appendChild(span);
+        });
+    }
+
+    // Render Projects
+    function renderProjects() {
+        const projectsGrid = document.getElementById('projectsGrid');
+        projectsGrid.innerHTML = '';
+        
+        if (portfolioData.projects && portfolioData.projects.length > 0) {
+            portfolioData.projects.forEach(project => {
+                projectsGrid.innerHTML += `
+                    <a href="${project.link}" class="project-card-link">
+                      <div class="project-card">
+                          <img src="${project.image}" alt="${project.title}" class="project-img">
+                          <h3>${project.title}</h3>
+                          <p>${project.description}</p>
+                      </div>
+                    </a>
+                `;
+            });
+        }
+    }
+
+    // Render Services
+    function renderServices() {
+        const serviceCards = document.getElementById('serviceCards');
+        serviceCards.innerHTML = '';
+        
+        if (portfolioData.services && portfolioData.services.length > 0) {
+            portfolioData.services.forEach(service => {
+                const trendingHTML = service.trending ? '<div class="price-tag trending">$' + service.price + ' <span>Trending</span></div>' : '<div class="price-tag">$' + service.price + '</div>';
+                const whatsappLink = `https://wa.me/${service.whatsapp}?text=${encodeURIComponent(service.whatsappText || `Hi, I'm interested in ${service.title} service`)}`;
+                
+                serviceCards.innerHTML += `
+                    <div class="service-card">
+                      <div class="card-icon"><i class="${service.icon}"></i></div>
+                      <h4>${service.title}</h4>
+                      ${trendingHTML}
+                      <a href="${whatsappLink}" class="buy-btn" target="_blank">Buy Now <i class="fab fa-whatsapp"></i></a>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    // Render Social Links
+    function renderSocial() {
+        const socialCards = document.getElementById('socialCards');
+        socialCards.innerHTML = '';
+        
+        if (portfolioData.social && portfolioData.social.length > 0) {
+            portfolioData.social.forEach(social => {
+                const verifiedHTML = social.verified ? '<span class="verified"><i class="fas fa-check-circle"></i> Verified</span>' : '';
+                socialCards.innerHTML += `
+                    <div class="social-card ${social.platform}-card">
+                      <div class="social-card-icon"><i class="${social.icon}"></i></div>
+                      <h4>${social.handle}</h4>
+                      <div class="social-stats"><span class="followers">${social.stats}</span> ${verifiedHTML}</div>
+                      <a href="${social.url}" class="social-btn" target="_blank">Connect <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    // Render Footer
+    function renderFooter() {
+        document.getElementById('footerName').textContent = portfolioData.profile.name;
+        document.getElementById('footerNameCopy').textContent = portfolioData.profile.name;
+        document.getElementById('yearFooter').textContent = new Date().getFullYear();
+
+        const footerSocial = document.getElementById('footerSocial');
+        footerSocial.innerHTML = '';
+        if (portfolioData.social && portfolioData.social.length > 0) {
+            portfolioData.social.forEach(social => {
+                footerSocial.innerHTML += `<a href="${social.url}" style="color:inherit" target="_blank"><i class="${social.icon}"></i></a>`;
+            });
+        }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        loadPortfolioData();
+        
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const closeBtn = document.getElementById('close-btn');
+        
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            hamburger.setAttribute('aria-expanded', 'true');
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+        });
+
+        // Sidebar links close sidebar
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Chatbot popup
+        const chatbotPopup = document.getElementById('chatbotPopup');
+        const openChatbot = document.querySelectorAll('[id*="openChatbot"]');
+        const closeChatbot = document.getElementById('closeChatbot');
+
+        openChatbot.forEach(btn => {
+            btn.addEventListener('click', () => chatbotPopup.classList.add('active'));
+        });
+        closeChatbot.addEventListener('click', () => chatbotPopup.classList.remove('active'));
+
+        // Social popup
+        const socialPopup = document.getElementById('socialChatbotPopup');
+        const openSocial = document.querySelectorAll('[id*="openSocial"]');
+        const closeSocial = document.getElementById('closeSocialChatbot');
+
+        openSocial.forEach(btn => {
+            btn.addEventListener('click', () => socialPopup.classList.add('active'));
+        });
+        closeSocial.addEventListener('click', () => socialPopup.classList.remove('active'));
+
+        // Theme toggle
+        document.querySelector('.theme-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+    });
+</script>
 
     <script src="script.js"></script>
 </body>
