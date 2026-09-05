@@ -763,6 +763,172 @@ h2 {
     }
 }
 
+/* ===================================================
+   Popup Widgets (Chatbot & Social Connect)
+   =================================================== */
+
+/* Common Popup Base */
+.chatbot-popup,
+.social-chatbot-popup {
+    position: fixed;
+    bottom: 24px;
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    max-height: 540px;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    box-sizing: border-box;
+}
+
+/* Individual Alignments */
+.chatbot-popup {
+    right: 24px;
+}
+
+.social-chatbot-popup {
+    right: 90px;
+}
+
+/* Hidden States (Toggle with .active or .show via JS) */
+.chatbot-popup:not(.active),
+.social-chatbot-popup:not(.active) {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.95);
+    pointer-events: none;
+}
+
+.chatbot-popup.active,
+.social-chatbot-popup.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+}
+
+/* Headers */
+.chatbot-header,
+.social-chatbot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background-color: #0f172a;
+    border-bottom: 1px solid #334155;
+}
+
+.chatbot-header h3,
+.social-chatbot-header h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.2px;
+}
+
+/* Close Buttons */
+.close-chatbot,
+.close-social-chatbot {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.close-chatbot:hover,
+.close-social-chatbot:hover {
+    color: #ffffff;
+    background-color: #334155;
+}
+
+/* Bodies & Scroll Containers */
+.chatbot-body,
+.social-chatbot-body {
+    padding: 16px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Custom Scrollbar */
+.chatbot-body::-webkit-scrollbar,
+.social-chatbot-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chatbot-body::-webkit-scrollbar-track,
+.social-chatbot-body::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+.chatbot-body::-webkit-scrollbar-thumb,
+.social-chatbot-body::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 3px;
+}
+
+.chatbot-body::-webkit-scrollbar-thumb:hover,
+.social-chatbot-body::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+/* Dynamic Card Grids/Containers */
+.service-cards,
+.social-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Dynamic Item Cards (Loaded from data.json) */
+.service-cards > *,
+.social-cards > * {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 14px;
+    color: #f8fafc;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.service-cards > *:hover,
+.social-cards > *:hover {
+    border-color: #3b82f6;
+    background-color: #162032;
+    transform: translateY(-2px);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+    .chatbot-popup,
+    .social-chatbot-popup {
+        right: 16px;
+        left: 16px;
+        width: auto;
+        bottom: 16px;
+        max-height: 80vh;
+    }
+    }
+
 
 /* ==================== TOGGLE SWITCH ==================== */
 
