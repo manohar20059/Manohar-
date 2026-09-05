@@ -182,11 +182,11 @@ body {
     width: 250px;
     height: 100vh;
     background: linear-gradient(135deg, rgba(157, 78, 221, 0.9), rgba(0, 212, 255, 0.9));
-    color: white;
+    color: yellow;
     transition: left 0.3s ease-in-out;
     z-index: 100;
     padding-top: 1rem;
-    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 0 30px rgba(0, 0, 0, 0.3);
     overflow-y: auto;
     backdrop-filter: blur(10px);
     border-right: 1px solid rgba(255, 255, 255, 0.3);
@@ -257,7 +257,7 @@ body {
     width: 24px;
     text-align: center;
     font-size: 1.1rem;
-    color: #ff3333; /* Icon red */
+    color: #ff3333; /* Icon pink */
     transition: all 0.3s ease;
 }
 
@@ -773,13 +773,13 @@ h2 {
 .chatbot-popup,
 .social-chatbot-popup {
     position: fixed;
-    bottom: 24px;
-    width: 360px;
+    bottom: 29px;
+    width: 380px;
     max-width: calc(100vw - 32px);
     max-height: 540px;
     background-color: #1e293b;
     border: 1px solid #334155;
-    border-radius: 16px;
+    border-radius: 18px;
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
@@ -795,7 +795,7 @@ h2 {
 }
 
 .social-chatbot-popup {
-    right: 90px;
+    right: 60px;
 }
 
 /* Hidden States (Toggle with .active or .show via JS) */
@@ -821,7 +821,7 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
+    padding: 18px 20px;
     background-color: #0f172a;
     border-bottom: 1px solid #334155;
 }
@@ -830,7 +830,7 @@ h2 {
 .social-chatbot-header h3 {
     margin: 0;
     font-size: 1.05rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #ffffff;
     letter-spacing: -0.2px;
 }
