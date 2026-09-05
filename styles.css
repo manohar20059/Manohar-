@@ -178,12 +178,12 @@ body {
 .sidebar {
     position: fixed;
     top: 0;
-    left: -30%;
+    left: -260px; /* Fix: Screen size koi bhi ho, sidebar pura bahar hide rahega */
     width: 250px;
     height: 100vh;
     background: linear-gradient(135deg, rgba(157, 78, 221, 0.9), rgba(0, 212, 255, 0.9));
     color: white;
-    transition: all 0.3s ease-in-out;
+    transition: left 0.3s ease-in-out;
     z-index: 100;
     padding-top: 1rem;
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.3);
@@ -232,7 +232,7 @@ body {
 }
 
 .sidebar-link {
-    color: white;
+    color: #ff69b4; /* Link text pink */
     text-decoration: none;
     padding: 1rem 0;
     display: flex;
@@ -247,7 +247,7 @@ body {
 }
 
 .sidebar-link:hover {
-    color: #00d4ff;
+    color: #ff1493; /* Hover par deep pink */
     transform: translateX(8px);
     padding-left: 10px;
 }
@@ -257,11 +257,13 @@ body {
     width: 24px;
     text-align: center;
     font-size: 1.1rem;
-    transition: var(--transition);
+    color: #ff3333; /* Icon red */
+    transition: all 0.3s ease;
 }
 
 .sidebar-link:hover i {
     animation: float 1s ease-in-out infinite;
+    color: #ff0000; /* Hover par bright red */
 }
 
 /* ==================== HERO SECTION ==================== */
