@@ -1,4 +1,4 @@
-// script.js — updated handlers: stopPropagation for open buttons, FAB toggle, safer outside-click checks, removed JS hide of widgets
+// script.js — updated handlers: stopPropagation for open buttons, FAB toggle, safer outside-click checks, contact form handling
 document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle
     const hamburger = document.getElementById('hamburger');
@@ -32,11 +32,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.querySelector('.theme-toggle');
     if (themeToggle) {
       themeToggle.addEventListener('click', function() {
-          document.body.classList.toggle('dark-theme');
-          
+          // Toggle data-theme attribute for better CSS control
+          const body = document.body;
+          if (body.getAttribute('data-theme') === 'dark') {
+              body.setAttribute('data-theme', 'light');
+          } else {
+              body.setAttribute('data-theme', 'dark');
+          }
+          localStorage.setItem('theme', body.getAttribute('data-theme'));
+
           // Toggle icon between moon and sun
           const icon = themeToggle.querySelector('i');
-          if (document.body.classList.contains('dark-theme')) {
+          if (body.getAttribute('data-theme') === 'dark') {
               icon.classList.remove('fa-moon');
               icon.classList.add('fa-sun');
           } else {
@@ -44,6 +51,15 @@ document.addEventListener('DOMContentLoaded', function() {
               icon.classList.add('fa-moon');
           }
       });
+
+      // Set initial icon from saved theme
+      const saved = localStorage.getItem('theme');
+      if (saved) document.body.setAttribute('data-theme', saved);
+      const _icon = themeToggle.querySelector('i');
+      if (_icon) {
+        if (document.body.getAttribute('data-theme') === 'dark') { _icon.classList.remove('fa-moon'); _icon.classList.add('fa-sun'); }
+        else { _icon.classList.remove('fa-sun'); _icon.classList.add('fa-moon'); }
+      }
     }
     
     // Close sidebar when a link is clicked (for mobile)
@@ -63,14 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatbotPopup = document.getElementById('chatbotPopup');
     const socialPopup = document.getElementById('socialChatbotPopup');
 
-    function openCreativeServicePopup(e){
-      if(e && e.stopPropagation) e.stopPropagation();
-      if(chatbotPopup) chatbotPopup.classList.add('active');
-    }
-    function openSocialPopup(e){
-      if(e && e.stopPropagation) e.stopPropagation();
-      if(socialPopup) socialPopup.classList.add('active');
-    }
+    function openCreativeServicePopup(e){ if(e && e.stopPropagation) e.stopPropagation(); if(chatbotPopup) chatbotPopup.classList.add('active'); }
+    function openSocialPopup(e){ if(e && e.stopPropagation) e.stopPropagation(); if(socialPopup) socialPopup.classList.add('active'); }
 
     if (s1) s1.addEventListener('click', openCreativeServicePopup);
     if (s2) s2.addEventListener('click', openCreativeServicePopup);
@@ -98,54 +108,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(event){
       const target = event.target;
       const clickedOnTrigger = !!(target.closest('#openChatbotFromSidebar') || target.closest('#openChatbotFromService') || target.closest('#openSocialFromSidebar') || target.closest('#chat-fab'));
-      if (chatbotPopup && !chatbotPopup.contains(target) && !clickedOnTrigger){
-        chatbotPopup.classList.remove('active');
-      }
-      if (socialPopup && !socialPopup.contains(target) && !clickedOnTrigger){
-        socialPopup.classList.remove('active');
-      }
+      if (chatbotPopup && !chatbotPopup.contains(target) && !clickedOnTrigger){ chatbotPopup.classList.remove('active'); }
+      if (socialPopup && !socialPopup.contains(target) && !clickedOnTrigger){ socialPopup.classList.remove('active'); }
     });
 
 });
-
-// Theme Toggle persistent (outside DOMContentLoaded for initial load)
-const _themeToggle = document.querySelector('.theme-toggle');
-const _body = document.body;
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme) {
-    _body.setAttribute('data-theme', currentTheme);
-    (function updateThemeIcon(){
-      const icon = _themeToggle && _themeToggle.querySelector('i');
-      if (!icon) return;
-      if (_body.getAttribute('data-theme') === 'dark') {
-          icon.classList.remove('fa-moon');
-          icon.classList.add('fa-sun');
-      } else {
-          icon.classList.remove('fa-sun');
-          icon.classList.add('fa-moon');
-      }
-    })();
-}
-
-if (_themeToggle) {
-  _themeToggle.addEventListener('click', () => {
-      if (_body.getAttribute('data-theme') === 'dark') {
-          _body.setAttribute('data-theme', 'light');
-      } else {
-          _body.setAttribute('data-theme', 'dark');
-      }
-      localStorage.setItem('theme', _body.getAttribute('data-theme'));
-      const icon = _themeToggle.querySelector('i');
-      if (!_body) return;
-      if (_body.getAttribute('data-theme') === 'dark') {
-          icon.classList.remove('fa-moon');
-          icon.classList.add('fa-sun');
-      } else {
-          icon.classList.remove('fa-sun');
-          icon.classList.add('fa-moon');
-      }
-  });
-}
 
 // Smooth scrolling for anchor links (generic)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
