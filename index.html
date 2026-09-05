@@ -19,16 +19,19 @@
             <li><a href="#about-skills"><i class="fas fa-user"></i> About</a></li>
             <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
             <li><a href="#service"><i class="fas fa-handshake"></i> My Service</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
         
         <!-- Theme Toggle -->
-        <div class="theme-toggle">
+        <div class="theme-toggle" title="Toggle dark mode">
             <i class="fas fa-moon"></i>
         </div>
         
         <!-- Mobile Hamburger Button -->
         <div class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-            <i class="fas fa-bars"></i>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
         </div>
     </nav>
 
@@ -46,341 +49,492 @@
             <a href="#about-skills" class="sidebar-link"><i class="fas fa-user"></i> About</a>
             <a href="#projects" class="sidebar-link"><i class="fas fa-project-diagram"></i> Projects</a>
             <a href="#service" class="sidebar-link"><i class="fas fa-handshake"></i> My Service</a>
+            <a href="#contact" class="sidebar-link"><i class="fas fa-envelope"></i> Contact</a>
             <button class="sidebar-link sidebar-trigger" id="openChatbotFromSidebar"><i class="fas fa-comment-dots"></i> Creative Services</button>
             <button class="sidebar-link sidebar-trigger" id="openSocialFromSidebar"><i class="fas fa-share-alt"></i> Connect</button>
         </div>
     </aside>
 
+    <!-- Hero Section -->
+    <section id="home" class="hero vfx-hero">
+        <div class="vfx-container">
+            <div class="vfx-left">
+                <div class="eyebrow">Hi! I Am <strong id="heroName">Manohar Singh</strong></div>
+                <h1 class="vfx-title" id="heroTitle">Professional Video Editor</h1>
+                <p class="vfx-lead" id="heroBio">Creating cinematic experiences through dynamic editing — cuts, VFX, color grading and motion graphics that tell your story.</p>
 
-<!-- Hero Section -->
-<section id="home" class="hero vfx-hero">
-    <div class="vfx-container">
-        <div class="vfx-left">
-            <div class="eyebrow">Hi! I Am <strong id="heroName">Manohar Singh</strong></div>
-            <h1 class="vfx-title" id="heroTitle">Professional Video Editor</h1>
-            <p class="vfx-lead" id="heroBio">Creating cinematic experiences through dynamic editing — cuts, VFX, color grading and motion graphics that tell your story.</p>
+                <div class="vfx-buttons">
+                    <a class="vfx-btn vfx-primary" href="#service">Hire Me</a>
+                    <a class="vfx-btn vfx-outline" href="#projects">View My Work</a>
+                </div>
+            </div>
 
-            <div class="vfx-buttons">
-                <a class="vfx-btn vfx-primary" href="#service">Hire Me</a>
-                <a class="vfx-btn vfx-outline" href="#projects">View My Work</a>
+            <div class="vfx-right">
+                <div class="portrait" id="portrait">
+                    <img id="heroImage" src="Img/p1.jpg" alt="profile" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80'">
+                </div>
             </div>
         </div>
+    </section>
+    
+    <!-- About & Skills (combined) -->
+    <section id="about-skills" class="about-skills">
+        <div class="about-skills-inner">
+            <div class="about-left">
+                <h2>About Me</h2>
+                <h3 id="aboutName">Manohar Singh</h3>
+                <p id="aboutText">Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading. I deliver fast, clean edits with creative motion graphics.</p>
 
-        <div class="vfx-right">
-            <div class="portrait" id="portrait">
-                <img id="heroImage" src="Img/p1.jpg" alt="profile" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80'">
+                <div class="skills-tags compact" id="skillsTags">
+                    <span>Video Editing</span>
+                    <span>Color Grading</span>
+                    <span>Motion Graphics</span>
+                    <span>VFX</span>
+                    <span>Audio Design</span>
+                </div>
+
+                <div style="margin-top:18px">
+                    <a class="buy-btn" href="#service">See Services</a>
+                    <a class="vfx-btn vfx-outline" href="project-detail.html" style="margin-left:10px">View Case Study</a>
+                </div>
+            </div>
+
+            <div class="about-right">
+                <img id="aboutImage" src="Img/p1.jpg" alt="Manohar Singh" class="profile-img" onerror="this.src='https://via.placeholder.com/400x400?text=Profile+Image'">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2>My Projects</h2>
+        <div class="projects-grid" id="projectsGrid">
+            <!-- Dynamically loaded from data.json -->
+        </div>
+    </section>
+    
+    <!-- Service Section -->
+    <section id="service" class="about">
+        <h2>My Service</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Click below to open creative services and packages (you can contact or buy from here).</p>
+                <button class="buy-btn" id="openChatbotFromService">Open Creative Services</button>
+            </div>
+            <div class="about-image">
+                <img src="Img/m2.jpg" alt="service" class="profile-img" style="width:320px;height:220px;object-fit:cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <h2>Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-form-wrapper">
+                <form id="contactForm" class="contact-form" action="https://formspree.io/f/xzebvnnj" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Your name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" placeholder="Your age" min="1" max="120">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Mobile Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+91-XXXXXXXXXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">What service do you need? *</label>
+                        <select id="service" name="service" required>
+                            <option value="">Select a service</option>
+                            <option value="Video Editing">Video Editing</option>
+                            <option value="Motion Graphics">Motion Graphics</option>
+                            <option value="Color Grading">Color Grading</option>
+                            <option value="VFX">VFX</option>
+                            <option value="Audio Design">Audio Design</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..."></textarea>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                        <button type="reset" class="btn-reset">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+
+                    <div class="form-message" id="formMessage"></div>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <div class="info-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Phone</h3>
+                    <p id="contactPhone">+91-9079216393</p>
+                </div>
+
+                <div class="info-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p id="contactEmail">your-email@example.com</p>
+                </div>
+
+                <div class="info-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Location</h3>
+                    <p>India</p>
+                </div>
+
+                <div class="info-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Response Time</h3>
+                    <p>24 hours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatbot Popup -->
+    <div class="chatbot-popup" id="chatbotPopup">
+        <div class="chatbot-header">
+            <h3>Creative Services</h3>
+            <button class="close-chatbot" id="closeChatbot">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-body">
+            <div class="service-cards" id="serviceCards">
+                <!-- Dynamically loaded from data.json -->
             </div>
         </div>
     </div>
-</section>
-
-<!-- About & Skills (combined) -->
-<section id="about-skills" class="about-skills">
-  <div class="about-skills-inner">
-    <div class="about-left">
-      <h2>About Me</h2>
-      <h3 id="aboutName">Manohar Singh</h3>
-      <p id="aboutText">Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading. I deliver fast, clean edits with creative motion graphics.
-
-      <div class="skills-tags compact" id="skillsTags">
-        <span>Video Editing</span>
-        <span>Color Grading</span>
-        <span>Motion Graphics</span>
-        <span>VFX</span>
-        <span>Audio Design</span>
-      </div>
-
-      <div style="margin-top:18px">
-        <a class="buy-btn" href="#service">See Services</a>
-        <a class="vfx-btn vfx-outline" href="project-detail.html" style="margin-left:10px">View Case Study</a>
-      </div>
+    
+    <!-- Social Connect Popup -->
+    <div class="social-chatbot-popup" id="socialChatbotPopup">
+        <div class="social-chatbot-header">
+            <h3>Connect With Me</h3>
+            <button class="close-social-chatbot" id="closeSocialChatbot"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="social-chatbot-body">
+            <div class="social-cards" id="socialCards">
+                <!-- Dynamically loaded from data.json -->
+            </div>
+        </div>
     </div>
 
-    <div class="about-right">
-      <img id="aboutImage" src="Img/p1.jpg" alt="Manohar Singh" class="profile-img" onerror="this.src='https://via.placeholder.com/400x400?text=Profile+Image'">
-    </div>
-  </div>
-</section>
+    <footer class="footer">
+        <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center">
+            <div style="flex:1;min-width:220px">
+                <div style="font-weight:700;font-size:1.1rem" id="footerName">Manohar Singh</div>
+                <div style="font-size:0.95rem;margin-top:6px">© <span id="yearFooter"></span> <span id="footerNameCopy">Manohar Singh</span>. All rights reserved.</div>
+                <div style="font-size:0.86rem;color:#9aa;margin-top:8px">Disclaimer: Portfolio content for demonstration. Delivery & usage terms on contract.</div>
+            </div>
 
-<!-- Projects Section -->
-<section id="projects" class="projects">
-    <h2>My Projects</h2>
-    <div class="projects-grid" id="projectsGrid">
-        <!-- Dynamically loaded from data.json -->
-    </div>
-</section>
+            <div style="flex:1;min-width:240px;text-align:center">
+                <div style="font-weight:600;margin-bottom:8px">Brand partners</div>
+                <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap" id="brandPartners">
+                    <img src="https://via.placeholder.com/120x40?text=Partner+1" alt="partner1" style="height:40px;object-fit:contain">
+                    <img src="https://via.placeholder.com/120x40?text=Partner+2" alt="partner2" style="height:40px;object-fit:contain">
+                    <img src="https://via.placeholder.com/120x40?text=Partner+3" alt="partner3" style="height:40px;object-fit:contain">
+                </div>
+            </div>
 
-<!-- Service Section -->
-<section id="service" class="about">
-  <h2>My Service</h2>
-  <div class="about-content">
-    <div class="about-text">
-      <p>Click below to open creative services and packages (you can contact or buy from here).</p>
-      <button class="buy-btn" id="openChatbotFromService">Open Creative Services</button>
-    </div>
-    <div class="about-image">
-      <img src="Img/m2.jpg" alt="service" class="profile-img" style="width:320px;height:220px;object-fit:cover;">
-    </div>
-  </div>
-</section>
+            <div style="flex:1;min-width:220px;text-align:right">
+                <div style="font-weight:600;margin-bottom:8px">Follow</div>
+                <div style="display:flex;gap:12px;justify-content:flex-end" id="footerSocial">
+                    <!-- Dynamically loaded from data.json -->
+                </div>
+            </div>
+        </div>
+    </footer>
 
-<!-- Chatbot Popup -->
-<div class="chatbot-popup" id="chatbotPopup">
-  <div class="chatbot-header">
-    <h3>Creative Services</h3>
-    <button class="close-chatbot" id="closeChatbot">
-      <i class="fas fa-times"></i>
-    </button>
-  </div>
-  <div class="chatbot-body">
-    <div class="service-cards" id="serviceCards">
-      <!-- Dynamically loaded from data.json -->
-    </div>
-  </div>
-</div>
+    <script>
+        // Global data object
+        let portfolioData = {};
 
-<!-- Social Connect Popup -->
-<div class="social-chatbot-popup" id="socialChatbotPopup">
-  <div class="social-chatbot-header">
-    <h3>Connect With Me</h3>
-    <button class="close-social-chatbot" id="closeSocialChatbot"><i class="fas fa-times"></i></button>
-  </div>
-  <div class="social-chatbot-body">
-    <div class="social-cards" id="socialCards">
-      <!-- Dynamically loaded from data.json -->
-    </div>
-  </div>
-</div>
+        // Load portfolio data from data.json
+        async function loadPortfolioData() {
+            try {
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error('Failed to load data.json');
+                portfolioData = await response.json();
+                renderPortfolio();
+            } catch (error) {
+                console.error('Error loading portfolio data:', error);
+                loadDefaultData();
+            }
+        }
 
-<footer class="footer" style="background:#0b0b0b;color:#ddd;padding:40px 5%;">
-  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center">
-    <div style="flex:1;min-width:220px">
-      <div style="font-weight:700;font-size:1.1rem" id="footerName">Manohar Singh</div>
-      <div style="font-size:0.95rem;margin-top:6px">© <span id="yearFooter"></span> <span id="footerNameCopy">Manohar Singh</span>. All rights reserved.</div>
-      <div style="font-size:0.86rem;color:#9aa;margin-top:8px">Disclaimer: Portfolio content for demonstration. Delivery & usage terms on contract.</div>
-    </div>
-
-    <div style="flex:1;min-width:240px;text-align:center">
-      <div style="font-weight:600;margin-bottom:8px">Brand partners</div>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <img src="https://via.placeholder.com/120x40?text=Partner+1" alt="partner1" style="height:40px;object-fit:contain">
-        <img src="https://via.placeholder.com/120x40?text=Partner+2" alt="partner2" style="height:40px;object-fit:contain">
-        <img src="https://via.placeholder.com/120x40?text=Partner+3" alt="partner3" style="height:40px;object-fit:contain">
-      </div>
-    </div>
-
-    <div style="flex:1;min-width:220px;text-align:right">
-      <div style="font-weight:600;margin-bottom:8px">Follow</div>
-      <div style="display:flex;gap:12px;justify-content:flex-end" id="footerSocial">
-        <!-- Dynamically loaded from data.json -->
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-    // Global data object
-    let portfolioData = {};
-
-    // Load portfolio data from data.json
-    async function loadPortfolioData() {
-        try {
-            const response = await fetch('data.json');
-            if (!response.ok) throw new Error('Failed to load data.json');
-            portfolioData = await response.json();
+        // Default data fallback
+        function loadDefaultData() {
+            portfolioData = {
+                profile: {
+                    name: "Manohar Singh",
+                    title: "Professional Video Editor",
+                    bio: "Creating cinematic experiences through dynamic editing — cuts, VFX, color grading and motion graphics that tell your story.",
+                    image: "Img/p1.jpg",
+                    fallbackImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+                    about: "Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading."
+                },
+                skills: ["Video Editing", "Color Grading", "Motion Graphics", "VFX", "Audio Design"],
+                projects: [],
+                services: [],
+                social: [],
+                contact: { whatsapp: "9079216393", email: "your-email@example.com", phone: "+91-9079216393" }
+            };
             renderPortfolio();
-        } catch (error) {
-            console.error('Error loading portfolio data:', error);
-            // Use default data if file not found
-            loadDefaultData();
         }
-    }
 
-    // Default data fallback
-    function loadDefaultData() {
-        portfolioData = {
-            profile: {
-                name: "Manohar Singh",
-                title: "Professional Video Editor",
-                bio: "Creating cinematic experiences through dynamic editing — cuts, VFX, color grading and motion graphics that tell your story.",
-                image: "Img/p1.jpg",
-                fallbackImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
-                about: "Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading."
-            },
-            skills: ["Video Editing", "Color Grading", "Motion Graphics", "VFX", "Audio Design"],
-            projects: [],
-            services: [],
-            social: [],
-            contact: { whatsapp: "9079216393", email: "your-email@example.com", phone: "+91-9079216393" }
-        };
-        renderPortfolio();
-    }
+        // Render all portfolio content
+        function renderPortfolio() {
+            renderProfile();
+            renderProjects();
+            renderServices();
+            renderSocial();
+            renderFooter();
+        }
 
-    // Render all portfolio content
-    function renderPortfolio() {
-        renderProfile();
-        renderProjects();
-        renderServices();
-        renderSocial();
-        renderFooter();
-    }
+        // Render Profile Section
+        function renderProfile() {
+            const profile = portfolioData.profile;
+            document.getElementById('pageTitle').textContent = `${profile.name} - Video Editor Portfolio`;
+            document.getElementById('navLogo').textContent = profile.name;
+            document.getElementById('heroName').textContent = profile.name;
+            document.getElementById('heroTitle').textContent = profile.title;
+            document.getElementById('heroBio').textContent = profile.bio;
+            document.getElementById('heroImage').src = profile.image;
+            document.getElementById('heroImage').onerror = function() { this.src = profile.fallbackImage; };
+            
+            document.getElementById('aboutName').textContent = profile.name;
+            document.getElementById('aboutText').textContent = profile.about;
+            document.getElementById('aboutImage').src = profile.image;
+            document.getElementById('aboutImage').onerror = function() { this.src = profile.fallbackImage; };
 
-    // Render Profile Section
-    function renderProfile() {
-        const profile = portfolioData.profile;
-        document.getElementById('pageTitle').textContent = `${profile.name} - Video Editor Portfolio`;
-        document.getElementById('navLogo').textContent = profile.name;
-        document.getElementById('heroName').textContent = profile.name;
-        document.getElementById('heroTitle').textContent = profile.title;
-        document.getElementById('heroBio').textContent = profile.bio;
-        document.getElementById('heroImage').src = profile.image;
-        document.getElementById('heroImage').onerror = function() { this.src = profile.fallbackImage; };
-        
-        document.getElementById('aboutName').textContent = profile.name;
-        document.getElementById('aboutText').textContent = profile.about;
-        document.getElementById('aboutImage').src = profile.image;
-        document.getElementById('aboutImage').onerror = function() { this.src = profile.fallbackImage; };
+            // Update contact info
+            document.getElementById('contactPhone').textContent = profile.contact?.phone || '+91-9079216393';
+            document.getElementById('contactEmail').textContent = profile.contact?.email || 'your-email@example.com';
 
-        // Render skills
-        const skillsContainer = document.getElementById('skillsTags');
-        skillsContainer.innerHTML = '';
-        portfolioData.skills.forEach(skill => {
-            const span = document.createElement('span');
-            span.textContent = skill;
-            skillsContainer.appendChild(span);
-        });
-    }
-
-    // Render Projects
-    function renderProjects() {
-        const projectsGrid = document.getElementById('projectsGrid');
-        projectsGrid.innerHTML = '';
-        
-        if (portfolioData.projects && portfolioData.projects.length > 0) {
-            portfolioData.projects.forEach(project => {
-                projectsGrid.innerHTML += `
-                    <a href="${project.link}" class="project-card-link">
-                      <div class="project-card">
-                          <img src="${project.image}" alt="${project.title}" class="project-img">
-                          <h3>${project.title}</h3>
-                          <p>${project.description}</p>
-                      </div>
-                    </a>
-                `;
+            // Render skills
+            const skillsContainer = document.getElementById('skillsTags');
+            skillsContainer.innerHTML = '';
+            portfolioData.skills.forEach(skill => {
+                const span = document.createElement('span');
+                span.textContent = skill;
+                skillsContainer.appendChild(span);
             });
         }
-    }
 
-    // Render Services
-    function renderServices() {
-        const serviceCards = document.getElementById('serviceCards');
-        serviceCards.innerHTML = '';
-        
-        if (portfolioData.services && portfolioData.services.length > 0) {
-            portfolioData.services.forEach(service => {
-                const trendingHTML = service.trending ? '<div class="price-tag trending">$' + service.price + ' <span>Trending</span></div>' : '<div class="price-tag">$' + service.price + '</div>';
-                const whatsappLink = `https://wa.me/${service.whatsapp}?text=${encodeURIComponent(service.whatsappText || `Hi, I'm interested in ${service.title} service`)}`;
-                
-                serviceCards.innerHTML += `
-                    <div class="service-card">
-                      <div class="card-icon"><i class="${service.icon}"></i></div>
-                      <h4>${service.title}</h4>
-                      ${trendingHTML}
-                      <a href="${whatsappLink}" class="buy-btn" target="_blank">Buy Now <i class="fab fa-whatsapp"></i></a>
-                    </div>
-                `;
-            });
+        // Render Projects
+        function renderProjects() {
+            const projectsGrid = document.getElementById('projectsGrid');
+            projectsGrid.innerHTML = '';
+            
+            if (portfolioData.projects && portfolioData.projects.length > 0) {
+                portfolioData.projects.forEach(project => {
+                    projectsGrid.innerHTML += `
+                        <a href="${project.link}" class="project-card-link">
+                            <div class="project-card">
+                                <img src="${project.image}" alt="${project.title}" class="project-img">
+                                <h3>${project.title}</h3>
+                                <p>${project.description}</p>
+                            </div>
+                        </a>
+                    `;
+                });
+            }
         }
-    }
 
-    // Render Social Links
-    function renderSocial() {
-        const socialCards = document.getElementById('socialCards');
-        socialCards.innerHTML = '';
-        
-        if (portfolioData.social && portfolioData.social.length > 0) {
-            portfolioData.social.forEach(social => {
-                const verifiedHTML = social.verified ? '<span class="verified"><i class="fas fa-check-circle"></i> Verified</span>' : '';
-                socialCards.innerHTML += `
-                    <div class="social-card ${social.platform}-card">
-                      <div class="social-card-icon"><i class="${social.icon}"></i></div>
-                      <h4>${social.handle}</h4>
-                      <div class="social-stats"><span class="followers">${social.stats}</span> ${verifiedHTML}</div>
-                      <a href="${social.url}" class="social-btn" target="_blank">Connect <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                `;
-            });
+        // Render Services
+        function renderServices() {
+            const serviceCards = document.getElementById('serviceCards');
+            serviceCards.innerHTML = '';
+            
+            if (portfolioData.services && portfolioData.services.length > 0) {
+                portfolioData.services.forEach(service => {
+                    const trendingHTML = service.trending ? '<div class="price-tag trending">$' + service.price + ' <span>Trending</span></div>' : '<div class="price-tag">$' + service.price + '</div>';
+                    const whatsappLink = `https://wa.me/${service.whatsapp}?text=${encodeURIComponent(service.whatsappText || `Hi, I'm interested in ${service.title} service`)}`;
+                    
+                    serviceCards.innerHTML += `
+                        <div class="service-card">
+                            <div class="card-icon"><i class="${service.icon}"></i></div>
+                            <h4>${service.title}</h4>
+                            ${trendingHTML}
+                            <a href="${whatsappLink}" class="buy-btn" target="_blank">Buy Now <i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    `;
+                });
+            }
         }
-    }
 
-    // Render Footer
-    function renderFooter() {
-        document.getElementById('footerName').textContent = portfolioData.profile.name;
-        document.getElementById('footerNameCopy').textContent = portfolioData.profile.name;
-        document.getElementById('yearFooter').textContent = new Date().getFullYear();
-
-        const footerSocial = document.getElementById('footerSocial');
-        footerSocial.innerHTML = '';
-        if (portfolioData.social && portfolioData.social.length > 0) {
-            portfolioData.social.forEach(social => {
-                footerSocial.innerHTML += `<a href="${social.url}" style="color:inherit" target="_blank"><i class="${social.icon}"></i></a>`;
-            });
+        // Render Social Links
+        function renderSocial() {
+            const socialCards = document.getElementById('socialCards');
+            socialCards.innerHTML = '';
+            
+            if (portfolioData.social && portfolioData.social.length > 0) {
+                portfolioData.social.forEach(social => {
+                    const verifiedHTML = social.verified ? '<span class="verified"><i class="fas fa-check-circle"></i> Verified</span>' : '';
+                    socialCards.innerHTML += `
+                        <div class="social-card ${social.platform}-card">
+                            <div class="social-card-icon"><i class="${social.icon}"></i></div>
+                            <h4>${social.handle}</h4>
+                            <div class="social-stats"><span class="followers">${social.stats}</span> ${verifiedHTML}</div>
+                            <a href="${social.url}" class="social-btn" target="_blank">Connect <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    `;
+                });
+            }
         }
-    }
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-        loadPortfolioData();
-        
-        // Hamburger menu
-        const hamburger = document.getElementById('hamburger');
-        const sidebar = document.getElementById('sidebar');
-        const closeBtn = document.getElementById('close-btn');
-        
-        hamburger.addEventListener('click', () => {
-            sidebar.classList.add('active');
-            hamburger.setAttribute('aria-expanded', 'true');
-        });
-        
-        closeBtn.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-        });
+        // Render Footer
+        function renderFooter() {
+            document.getElementById('footerName').textContent = portfolioData.profile.name;
+            document.getElementById('footerNameCopy').textContent = portfolioData.profile.name;
+            document.getElementById('yearFooter').textContent = new Date().getFullYear();
 
-        // Sidebar links close sidebar
-        document.querySelectorAll('.sidebar-link').forEach(link => {
-            link.addEventListener('click', () => {
+            const footerSocial = document.getElementById('footerSocial');
+            footerSocial.innerHTML = '';
+            if (portfolioData.social && portfolioData.social.length > 0) {
+                portfolioData.social.forEach(social => {
+                    footerSocial.innerHTML += `<a href="${social.url}" style="color:inherit" target="_blank"><i class="${social.icon}"></i></a>`;
+                });
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPortfolioData();
+            
+            // Hamburger menu
+            const hamburger = document.getElementById('hamburger');
+            const sidebar = document.getElementById('sidebar');
+            const closeBtn = document.getElementById('close-btn');
+            
+            hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                sidebar.classList.add('active');
+                hamburger.setAttribute('aria-expanded', 'true');
+            });
+            
+            closeBtn.addEventListener('click', () => {
                 sidebar.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
             });
+
+            // Close sidebar when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+                    sidebar.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Sidebar links close sidebar
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    sidebar.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // Chatbot popup
+            const chatbotPopup = document.getElementById('chatbotPopup');
+            const openChatbot = document.querySelectorAll('[id*="openChatbot"]');
+            const closeChatbot = document.getElementById('closeChatbot');
+
+            openChatbot.forEach(btn => {
+                btn.addEventListener('click', () => chatbotPopup.classList.add('active'));
+            });
+            closeChatbot.addEventListener('click', () => chatbotPopup.classList.remove('active'));
+
+            // Social popup
+            const socialPopup = document.getElementById('socialChatbotPopup');
+            const openSocial = document.querySelectorAll('[id*="openSocial"]');
+            const closeSocial = document.getElementById('closeSocialChatbot');
+
+            openSocial.forEach(btn => {
+                btn.addEventListener('click', () => socialPopup.classList.add('active'));
+            });
+            closeSocial.addEventListener('click', () => socialPopup.classList.remove('active'));
+
+            // Theme toggle
+            document.querySelector('.theme-toggle').addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+            });
+
+            // Restore theme preference
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+
+            // Contact form handler
+            const contactForm = document.getElementById('contactForm');
+            const formMessage = document.getElementById('formMessage');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(contactForm);
+                
+                fetch('https://formspree.io/f/xzebvnnj', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        formMessage.textContent = '✅ Message sent successfully! I will contact you soon.';
+                        formMessage.style.color = '#2ecc71';
+                        contactForm.reset();
+                        setTimeout(() => {
+                            formMessage.textContent = '';
+                        }, 5000);
+                    } else {
+                        formMessage.textContent = '❌ Error sending message. Please try again.';
+                        formMessage.style.color = '#ff6b6b';
+                    }
+                })
+                .catch(error => {
+                    formMessage.textContent = '❌ Error: ' + error.message;
+                    formMessage.style.color = '#ff6b6b';
+                });
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && document.querySelector(href)) {
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
-
-        // Chatbot popup
-        const chatbotPopup = document.getElementById('chatbotPopup');
-        const openChatbot = document.querySelectorAll('[id*="openChatbot"]');
-        const closeChatbot = document.getElementById('closeChatbot');
-
-        openChatbot.forEach(btn => {
-            btn.addEventListener('click', () => chatbotPopup.classList.add('active'));
-        });
-        closeChatbot.addEventListener('click', () => chatbotPopup.classList.remove('active'));
-
-        // Social popup
-        const socialPopup = document.getElementById('socialChatbotPopup');
-        const openSocial = document.querySelectorAll('[id*="openSocial"]');
-        const closeSocial = document.getElementById('closeSocialChatbot');
-
-        openSocial.forEach(btn => {
-            btn.addEventListener('click', () => socialPopup.classList.add('active'));
-        });
-        closeSocial.addEventListener('click', () => socialPopup.classList.remove('active'));
-
-        // Theme toggle
-        document.querySelector('.theme-toggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-        });
-    });
-</script>
+    </script>
 
     <script src="script.js"></script>
 </body>
