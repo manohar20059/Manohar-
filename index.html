@@ -19,7 +19,7 @@
             <li><a href="#about-skills"><i class="fas fa-user"></i> About</a></li>
             <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
             <li><a href="#service"><i class="fas fa-handshake"></i> My Service</a></li>
-            <li><a href="config.html" target="_blank" title="Edit Portfolio"><i class="fas fa-cog"></i> Edit</a></li>
+            <!-- Admin panel removed for production -->
         </ul>
         
         <!-- Theme Toggle -->
@@ -49,7 +49,7 @@
             <a href="#service" class="sidebar-link"><i class="fas fa-handshake"></i> My Service</a>
             <button class="sidebar-link sidebar-trigger" id="openChatbotFromSidebar"><i class="fas fa-comment-dots"></i> Creative Services</button>
             <button class="sidebar-link sidebar-trigger" id="openSocialFromSidebar"><i class="fas fa-share-alt"></i> Connect</button>
-            <a href="config.html" target="_blank" class="sidebar-link"><i class="fas fa-cog"></i> Edit Portfolio</a>
+            <!-- Admin panel link removed -->
         </div>
     </aside>
 
@@ -82,7 +82,7 @@
     <div class="about-left">
       <h2>About Me</h2>
       <h3 id="aboutName">Manohar Singh</h3>
-      <p id="aboutText">Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading. I deliver fast, clean edits with creative motion work when needed.</p>
+      <p id="aboutText">Professional Video Editor with 3+ years of experience in cinematic storytelling, dynamic transitions, VFX and color grading. I deliver fast, clean edits with creative motio[...]</p>
 
       <div class="skills-tags compact" id="skillsTags">
         <span>Video Editing</span>
@@ -122,6 +122,41 @@
     </div>
     <div class="about-image">
       <img src="Img/m2.jpg" alt="service" class="profile-img" style="width:320px;height:220px;object-fit:cover;">
+    </div>
+  </div>
+</section>
+
+<!-- Contact Form (Modern) -->
+<section id="contact-form" class="contact-section">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <h2>Contact Me</h2>
+      <p>Send a quick message with your details and the service link. I will get back to you soon.</p>
+      <form id="contactForm">
+        <div class="form-row">
+          <label for="cf-name">Name</label>
+          <input id="cf-name" name="name" type="text" placeholder="Your name" required>
+        </div>
+        <div class="form-row">
+          <label for="cf-mobile">Mobile Number</label>
+          <input id="cf-mobile" name="mobile" type="tel" placeholder="e.g. +91-98765xxxx" required>
+        </div>
+        <div class="form-row">
+          <label for="cf-service">Service Link / Service Name</label>
+          <input id="cf-service" name="service" type="url" placeholder="Link to your reference or service name" required>
+        </div>
+        <div class="form-row">
+          <label for="cf-message">Message (optional)</label>
+          <textarea id="cf-message" name="message" rows="4" placeholder="Any additional details..."></textarea>
+        </div>
+        <div class="form-row">
+          <button type="submit" class="btn-send">Send Message</button>
+          <div id="cf-status" class="cf-status" role="status" aria-live="polite"></div>
+        </div>
+      </form>
+    </div>
+    <div class="contact-right">
+      <img src="Img/p1.jpg" alt="contact" class="contact-illustration">
     </div>
   </div>
 </section>
@@ -386,6 +421,51 @@
         document.querySelector('.theme-toggle').addEventListener('click', function() {
             document.body.classList.toggle('dark-mode');
         });
+
+        // Contact form handler
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('cf-name').value.trim();
+                const mobile = document.getElementById('cf-mobile').value.trim();
+                const service = document.getElementById('cf-service').value.trim();
+                const message = document.getElementById('cf-message').value.trim();
+
+                const waNumber = (portfolioData.contact && portfolioData.contact.whatsapp) ? portfolioData.contact.whatsapp.replace(/[^0-9+]/g, '') : '';
+                const email = (portfolioData.contact && portfolioData.contact.email) ? portfolioData.contact.email : '';
+
+                const bodyText = `Name: ${name}\nMobile: ${mobile}\nService: ${service}\nMessage: ${message}`;
+
+                // If whatsapp available, open WhatsApp with prefilled message, otherwise use mailto
+                if (waNumber) {
+                    const waLink = `https://wa.me/${waNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(bodyText)}`;
+                    window.open(waLink, '_blank');
+                    showContactStatus('Message opened in WhatsApp', true);
+                } else if (email) {
+                    const mailto = `mailto:${email}?subject=${encodeURIComponent('New enquiry from portfolio site')}&body=${encodeURIComponent(bodyText)}`;
+                    window.location.href = mailto;
+                    showContactStatus('Email client opened', true);
+                } else {
+                    // Fallback: copy to clipboard
+                    navigator.clipboard.writeText(bodyText).then(() => {
+                        showContactStatus('Details copied to clipboard. Paste and send to contact.', true);
+                    }).catch(() => {
+                        showContactStatus('Unable to send. Please contact via phone.', false);
+                    });
+                }
+
+                contactForm.reset();
+            });
+        }
+
+        function showContactStatus(msg, success) {
+            const status = document.getElementById('cf-status');
+            status.textContent = msg;
+            status.classList.toggle('success', success);
+            status.classList.toggle('error', !success);
+            setTimeout(() => { status.textContent = ''; status.className = 'cf-status'; }, 5000);
+        }
     });
 </script>
 
